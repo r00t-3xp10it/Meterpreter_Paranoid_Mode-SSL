@@ -69,7 +69,6 @@
 ![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/ws0tkJU.png)
 ![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/5dgO89S.png)
 ![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/em7t0J6.png)
-![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/F31lEJV.png)
 
 <br />
 
