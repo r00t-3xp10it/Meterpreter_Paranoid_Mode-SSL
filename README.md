@@ -71,10 +71,9 @@
 <br /><br />
 
 ## Tool screenshots
-![Meterpreter_Paranoid_Mode v1.2](http://4.1m.yt/6SrdKEM.png)
+![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/em7t0J6.png)
 ![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/ws0tkJU.png)
 ![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/5dgO89S.png)
-![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/em7t0J6.png)
 
 <br />
 
