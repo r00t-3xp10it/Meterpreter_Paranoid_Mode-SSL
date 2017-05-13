@@ -1,6 +1,6 @@
 [![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.2-brightgreen.svg?maxAge=259200)]()
-[![Stage](https://img.shields.io/badge/Release-Alpha-brightgreen.svg)]()
-[![Build](https://img.shields.io/badge/Supported_OS-kali,Ubuntu,Mint,Parrot-blue.svg)]()
+[![Stage](https://img.shields.io/badge/Release-Alpha-orange.svg)]()
+[![Build](https://img.shields.io/badge/Supported_OS-kali-blue.svg)]()
 
 
 ![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/fgzGtKJ.png)
