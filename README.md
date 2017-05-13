@@ -34,8 +34,8 @@
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true. 
 
 
-    When we get payload execution, we can see the stage doing the validation
-![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/Gsm4ejx.png)
+    When we get payload execution (target), we can see the stage doing the validation
+![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/1H6IuSu.png)
 
  
 ## Exploitation:
