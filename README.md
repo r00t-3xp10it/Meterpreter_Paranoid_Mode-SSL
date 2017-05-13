@@ -3,7 +3,7 @@
 [![Build](https://img.shields.io/badge/Supported_OS-kali-blue.svg)]()
 
 
-![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/fgzGtKJ.png)
+![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/4xyGfw.png)
 
 
 ## Meterpreter_Paranoid_Mode v1.2 - SSL/TLS connections
