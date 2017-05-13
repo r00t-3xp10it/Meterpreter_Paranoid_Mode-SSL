@@ -82,7 +82,6 @@ FakeImageExploiter [ the noob friendly funtion ]: https://www.youtube.com/watch?
 ### Special thanks:
 **@hdmoore** | **@OJ** | **@darkoperator**
 
-Credits:
 http://buffered.io/posts/staged-vs-stageless-handlers/
 
 https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
