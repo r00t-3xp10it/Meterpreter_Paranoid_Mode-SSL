@@ -56,7 +56,7 @@
     This tool also allow users to check postgresql msfdb connection and rebuilds
     the database if not connected, but for that we need to edit script and config
     'ChEk_DB="ON"' and save the script before run it again.
-![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/KuKIIFC.png)
+![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/sEdMR.png)
 
 
 <br /><br />

