@@ -82,9 +82,9 @@
 <br />
 
 ## Video tutorials:
-Meterpreter_Paranoid_Mode [ Official release - Main funtions ]: https://www.youtube.com/watch?v=4dEYIO-xBHU
+Meterpreter_Paranoid_Mode [ Stageless payload ]: https://www.youtube.com/watch?v=4dEYIO-xBHU
 
-Meterpreter_Paranoid_Mode [ the noob friendly funtion ]: https://www.youtube.com/watch?v=abhIp-SG4kM
+Meterpreter_Paranoid_Mode [ Staged payload ]: https://www.youtube.com/watch?v=abhIp-SG4kM
 
 <br />
 
