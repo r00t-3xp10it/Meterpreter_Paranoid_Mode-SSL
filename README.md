@@ -35,7 +35,7 @@
 
 
     When we get payload execution (target), we can see the stage doing the validation
-![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/1H6IuSu.png)
+![Meterpreter_Paranoid_Mode v1.2](http://4.1m.yt/culWay.png)
 
  
 ## Exploitation:
