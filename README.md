@@ -22,6 +22,7 @@
      We start by generating a certificate in PEM format, once the certs have
      been created we can create a HTTP or HTTPS or EXE payload for it and give
      it the path of PEM format certificate to be used to validate the connection.
+
      To have the connection validated we need to tell the payload what certificate
      the handler will be using by setting the path to the PEM certificate in the
      HANDLERSSLCERT option then we enable the checking of this certificate by
