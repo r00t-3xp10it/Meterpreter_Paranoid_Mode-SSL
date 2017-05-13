@@ -49,6 +49,10 @@
 ## Dependencies/Limitations:
     xterm, zenity, metasploit, postgresql
 
+
+    WARNING: This tool will NOT evade AV detection, its made to prevent the data
+    beeing transmited from client (payload) to server beeing captured (Eavesdropping)
+
     This tool also allow users to check postgresql msfdb connection and rebuilds
     the database if not connected, but for that we need to edit script and config
     'ChEk_DB="ON"' and save the script before run it again.
