@@ -59,7 +59,7 @@
          cd Meterpreter_Paranoid_Mode-SSL
          sudo chmod +x *.sh
 
-    4º - Run main tool
+    3º - Run main tool
          sudo ./Meterpreter_Paranoid_Mode.sh
 
 <br /><br />
