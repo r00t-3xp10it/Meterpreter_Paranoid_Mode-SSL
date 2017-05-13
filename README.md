@@ -3,7 +3,7 @@
 [![Build](https://img.shields.io/badge/Supported_OS-kali,Ubuntu,Mint,Parrot-blue.svg)]()
 
 
-![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/EASUSH9.png)
+![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/fgzGtKJ.png)
 
 
 ## Meterpreter_Paranoid_Mode v1.2 - SSL/TLS connections
@@ -34,15 +34,14 @@
 
 
     When we get payload execution, we can see the stage doing the validation
-    [*] 192.168.1.67:666 (UUID: db09ad1/x86=1/windows=1/2017-05-13 Staging payload
-    [*] Meterpreter will verify SSL Certificate with SHA1 hash 5fefcc6cae205d8c884
-    [*] Meterpreter session 1 opened (192.168.1.69:8081 -> 192.168.1.67:666)
+![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/Gsm4ejx.png)
 
  
 ## Exploitation:
     Meterpreter_Paranoid_Mode tool starts posgresql service, builds the PEM certificate,
     builds payload (staged OR stageless), and starts the corespondent handler associated
     to the PEM certificate created or impersonated (msf auxliary module) ..
+![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/quzn56A.png)
 
 <br /><br />
 
@@ -56,7 +55,7 @@
          git clone https://github.com/r00t-3xp10it/Meterpreter_Paranoid_Mode-SSL.git
 
     2º - Set files execution permitions
-         cd Meterpreter_Paranoid_Mode(SSL)
+         cd Meterpreter_Paranoid_Mode-SSL
          sudo chmod +x *.sh
 
     4º - Run main tool
@@ -65,9 +64,11 @@
 <br /><br />
 
 ## Tool screenshots
-![FakeImageExploiter v1.3](http://2.1m.yt/KvgWyAF.png)
-![FakeImageExploiter v1.3](http://3.1m.yt/aQOyj70.png)
-![FakeImageExploiter v1.3](http://2.1m.yt/fa0CN5K.jpg)
+![Meterpreter_Paranoid_Mode v1.2](http://4.1m.yt/6SrdKEM.png)
+![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/em7t0J6.png)
+![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/F31lEJV.png)
+![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/ws0tkJU.png)
+![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/5dgO89S.png)
 
 <br />
 
@@ -83,7 +84,9 @@ FakeImageExploiter [ the noob friendly funtion ]: https://www.youtube.com/watch?
 
 Credits:
 http://buffered.io/posts/staged-vs-stageless-handlers/
+
 https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
+
 https://www.darkoperator.com/blog/2015/6/14/tip-meterpreter-ssl-certificate-validation
 
 **Suspicious-Shell-Activity (SSA) RedTeam develop @2017**
