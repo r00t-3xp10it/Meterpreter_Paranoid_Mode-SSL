@@ -57,6 +57,8 @@
     windows/x64/meterpreter_reverse_https
     windows/meterpreter_reverse_http
 
+    HINT: Only in 'staged' builds, Users are allowed to chose the extension (payload)
+
 <br /><br />
 
 ## Dependencies/Limitations:
