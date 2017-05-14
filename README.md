@@ -67,6 +67,8 @@
 
     WARNING: This tool will NOT evade AV detection, its made to prevent the data
     beeing transmited from client (payload) to server beeing captured (Eavesdropping)
+    WARNING: If you decided to use an 64bit payload, then we must edit script and
+    change 'ENCODE="x86/shikata_ga_nai"' to one payload arch compatible encoder(64bit)
 
     This tool also allow users to check postgresql msfdb connection and rebuilds
     the database if not connected, but for that we need to edit script and config
@@ -103,7 +105,7 @@ Meterpreter_Paranoid_Mode [ Staged payload - bat ]: ---
 
 <br />
 
-### Special thanks:
+### Special thanks (POCs):
 **@hdmoore** | **@OJ** | **@darkoperator**
 
 http://buffered.io/posts/staged-vs-stageless-handlers/

