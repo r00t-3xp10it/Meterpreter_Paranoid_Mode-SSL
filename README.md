@@ -45,14 +45,14 @@
 ![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
-    Staged (binary.exe):
+    Staged (payload.bat):
     windows/meterpreter/reverse_winhttps
     windows/meterpreter/reverse_https
     windows/x64/meterpreter/reverse_https
     windows/meterpreter/reverse_http
     windows/meterpreter/reverse_tcp
 
-    Stageless (payload.bat):
+    Stageless (binary.exe):
     windows/meterpreter_reverse_https
     windows/x64/meterpreter_reverse_https
     windows/meterpreter_reverse_http
