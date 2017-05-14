@@ -45,7 +45,7 @@
 ![Meterpreter_Paranoid_Mode v1.2](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
-    Staged (payload.bat):
+    Staged (payload.bat|ps1|txt):
     windows/meterpreter/reverse_winhttps
     windows/meterpreter/reverse_https
     windows/x64/meterpreter/reverse_https
