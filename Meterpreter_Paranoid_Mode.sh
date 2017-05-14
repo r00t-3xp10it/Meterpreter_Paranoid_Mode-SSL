@@ -225,7 +225,7 @@ elif [ "$cHos" = "impersonate domain" ]; then
   #
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
   N4M3=$(zenity --title="☠ Enter  DOMAIN NAME ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
-  echo ${BlueF}[☠]${white} Building certificate ..${BlueF};
+  echo ${BlueF}[☠]${white} Impersonating certificate ..${BlueF};
   xterm -T "MPM - IMPERSONATE CERTIFICATE" -geometry 121x26 -e "msfconsole -q -x 'use auxiliary/gather/impersonate_ssl; set RHOST $N4M3; exploit; sleep 3; exit -y'"
   echo "Impersonating $N4M3 RSA private key"
   sleep 1
