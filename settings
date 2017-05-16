@@ -1,0 +1,56 @@
+##############################################################################
+#                                                                            #
+#   The following config file will allow you to customize settings within    #
+#   Meterpreter_Paranoid_Mode, The lines that Do not have comment code ("#") #
+#   are the fields you want to toy with. There are additional options, read  #
+#   the comments For additional config settings.                             #
+#                                                                            #
+#   THIS SETTINGS WILL AFFECT 'Meterpreter_Paranoid_Mode.sh' WAY OF WORKING  #
+#                                                                            #
+##############################################################################
+
+
+
+
+### msf postgresql database connection check? (msfdb init)
+# This next setting allow users to check msf postgresql
+# connection status and rebuild msfdb if not connected.
+# values accepted are: OFF or ON
+-----------------
+REBUILD_MSFDB=OFF
+-----------------
+
+
+
+### Default payload extension (output) to use in staged builds
+# This next setting accepts ( bat | ps1 | txt ) extensions .
+# just change the next value to suite your needs ..
+---------------------
+PAYLOAD_EXTENSION=bat
+---------------------
+
+
+
+### Metasploit encoder to use in obfuscating payload sourcecode
+# This next settings allow users to chose a diferent msf encoder
+# and set how many interactions should by used to obfuscate .
+# ---
+# HINT: If we are planing in using a x64 payload build, then we
+# need to chose the conrrespondent encoder to x64 bits systems.  
+------------------------------
+ENCODER_INTERACTIONS=3
+MSF_ENCODER=x86/shikata_ga_nai
+------------------------------
+
+
+
+### Default msf core command to run at session creation
+# This next setting allow users to chose any msf core
+# command on session creation automate ..
+----------------------------
+POST_EXPLOIT_COMMAND=sysinfo
+----------------------------
+
+
+
+_EOF

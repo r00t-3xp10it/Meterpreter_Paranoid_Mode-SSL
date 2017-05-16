@@ -49,15 +49,14 @@
     windows/meterpreter/reverse_winhttps
     windows/meterpreter/reverse_https
     windows/x64/meterpreter/reverse_https
-    windows/meterpreter/reverse_http
-    windows/meterpreter/reverse_tcp
 
     Stageless (binary.exe):
     windows/meterpreter_reverse_https
     windows/x64/meterpreter_reverse_https
-    windows/meterpreter_reverse_http
+
 
     HINT: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
+
 
 <br /><br />
 
@@ -67,14 +66,23 @@
 
     WARNING: This tool will NOT evade AV detection, its made to prevent the data
     beeing transmited from client (payload) to server beeing captured (Eavesdropping)
-    WARNING: If you decided to use an 64bit payload, then we must edit script and
-    change 'ENCODE="x86/shikata_ga_nai"' to one payload arch compatible encoder(64bit)
 
-    This tool also allow users to check postgresql msfdb connection and rebuilds
-    the database if not connected, but for that we need to edit script and config
-    'ChEk_DB="ON"' and save the script before run it again.
+    WARNING: If you decided to use a 64bit payload, then edit settings file and change
+    'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/sEdMR.png)
 
+
+<br /><br />
+
+## Config Settings file
+msf postgresql database connection check? (msfdb init)
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/IO6KNos.png)
+Default payload extension (output) to use in staged builds
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/VuHRPRw.png)
+Metasploit encoder to use in obfuscating payload sourcecode
+![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
+Default msf core command to run at session creation
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/fBFDQtQ.png)
 
 <br /><br />
 
@@ -86,7 +94,10 @@
          cd Meterpreter_Paranoid_Mode-SSL
          sudo chmod +x *.sh
 
-    3º - Run main tool
+    3º - Config tool settings
+         nano settings
+
+    4º - Run main tool
          sudo ./Meterpreter_Paranoid_Mode.sh
 
 <br /><br />
