@@ -67,8 +67,7 @@
     'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
 
     WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
-
-    WARNING: Staged payloads in this tool will not use the .exe extension
+    WARNING: 'Staged' payloads in this tool will not use the .exe extension
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/aSBR6_z.png)
 
 
