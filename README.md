@@ -74,10 +74,10 @@
 <br /><br />
 
 ## Config Settings file
-msf postgresql database connection check? (msfdb init)
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/IO6KNos.png)
+msf postgresql database connection check? (msfdb reinit)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/tLKSkOQ.png)
 Default payload extension (output) to use in staged builds
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/VuHRPRw.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 Default msf core command to run at session creation
