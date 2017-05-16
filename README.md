@@ -40,7 +40,7 @@
  
 ## Exploitation:
     Meterpreter_Paranoid_Mode tool starts posgresql service, builds the PEM certificate,
-    builds payload (staged OR stageless), and starts the corespondent handler associated
+    builds payload (staged OR stageless), and starts the comrespondent handler associated
     to the PEM certificate created (manual) OR impersonated (msf auxliary module) ..
 ![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/quzn56A.png)
 
