@@ -54,10 +54,6 @@
     windows/meterpreter_reverse_https
     windows/x64/meterpreter_reverse_https
 
-
-    HINT: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
-
-
 <br /><br />
 
 ## Dependencies/Limitations:
@@ -66,6 +62,8 @@
 
     WARNING: This tool will NOT evade AV detection, its made to prevent the data
     beeing transmited from client (payload) to server beeing captured (Eavesdropping)
+
+    WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
 
     WARNING: If you decided to use a 64bit payload, then edit settings file and change
     'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
