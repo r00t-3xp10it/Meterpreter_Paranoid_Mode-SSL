@@ -69,7 +69,6 @@
 
     WARNING: If you decided to use a 64bit payload, then edit settings file and change
     'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/sEdMR.png)
 
 
 <br /><br />
