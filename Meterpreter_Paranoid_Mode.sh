@@ -162,7 +162,7 @@ InT3R=`netstat -r | grep "default" | awk {'print $8'}` # grab interface in use
 case $DiStR0 in
     Kali) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}'`;;
     Debian) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}'`;;
-    Mint) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}' | cut -d ':' -f2`;;
+    Linux) IP=`ifconfig $InT3R | egrep -w "inet" | awk '{print $2}' | cut -d ':' -f2`;; # Mint strange bug
     Ubuntu) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
     Parrot) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
     BackBox) IP=`ifconfig $InT3R | egrep -w "inet" | cut -d ':' -f2 | cut -d 'B' -f1`;;
@@ -276,7 +276,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     # NOT compatible payload extension found ..
     echo ${RedF}[x] Aborting script execution ..${Reset};
     echo ${RedF}[x]${white} Extension:${RedF}$DEFAULT_EXT ${white}'(Not compatible)' with ${RedF}Staged${white} payloads ..${Reset};
-    echo ${RedF}[x]${white} Edit script and chose bat or ps1 or txt extensions ..${Reset};
+    echo ${RedF}[x]${white} Edit settings File and chose bat or ps1 or txt extensions ..${Reset};
     sleep 1
     exit
   fi

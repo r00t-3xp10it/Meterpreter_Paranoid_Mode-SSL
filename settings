@@ -46,7 +46,7 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 ### Default msf core command to run at session creation
 # This next setting allow users to chose any msf core
-# command on session creation automate ..
+# command to run on session creation automate ..
 ----------------------------
 POST_EXPLOIT_COMMAND=sysinfo
 ----------------------------
