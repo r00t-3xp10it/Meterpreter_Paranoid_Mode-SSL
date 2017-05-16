@@ -97,7 +97,7 @@ Default payload extension (output) to use in staged builds
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 Default msf core command to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/fBFDQtQ.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/RS-QJnd.png)
 
 <br /><br />
 
