@@ -63,10 +63,14 @@
     WARNING: This tool will NOT evade AV detection, its made to prevent the data
     beeing transmited from client (payload) to server beeing captured (Eavesdropping)
 
-    WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
-
     WARNING: If you decided to use a 64bit payload, then edit settings file and change
     'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
+
+    WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
+
+    WARNING: Staged payloads in this tool will not use the .exe extension
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/84FE0sC.png)
+
 
 
 <br /><br />
