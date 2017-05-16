@@ -70,7 +70,17 @@
     WARNING: 'Staged' payloads in this tool will not use the .exe extension
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/wzgG0m.png)
 
+<br /><br />
 
+## Config Settings file
+msf postgresql database connection check? (msfdb reinit)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/tLKSkOQ.png)
+Default payload extension (output) to use in staged builds
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
+Metasploit encoder to use in obfuscating payload sourcecode
+![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
+Default msf core command to run at session creation
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/RS-QJnd.png)
 
 <br /><br />
 
@@ -87,18 +97,6 @@
 
     4º - Run main tool
          sudo ./Meterpreter_Paranoid_Mode.sh
-
-<br /><br />
-
-## Config Settings file
-msf postgresql database connection check? (msfdb reinit)
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/tLKSkOQ.png)
-Default payload extension (output) to use in staged builds
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
-Metasploit encoder to use in obfuscating payload sourcecode
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
-Default msf core command to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/RS-QJnd.png)
 
 <br /><br />
 
