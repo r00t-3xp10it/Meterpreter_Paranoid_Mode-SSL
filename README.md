@@ -68,7 +68,7 @@
 
     WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
     WARNING: 'Staged' payloads in this tool will not use the .exe extension
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/aSBR6_z.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/wzgG0m.png)
 
 
 
