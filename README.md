@@ -80,7 +80,7 @@ Default payload extension (output) to use in staged builds
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 Default msf post module to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/FuZA68.png)
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/1ZhvEgq.png)
 Handler doing SSL/TLS validation and running post-exploitation module (enum_applications)
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
 

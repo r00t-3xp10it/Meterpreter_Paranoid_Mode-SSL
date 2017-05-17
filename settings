@@ -46,7 +46,8 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 ### Default msf post module to run at session creation
 # This next setting allow users to chose any msf post
-# module to run on session creation automate .
+# module to run on session creation (meterpreter >)
+# values accepted are: NO or YES and:
 # ---
 # HINT: post/windows/gather/enum_tokens
 # HINT: post/windows/gather/enum_shares
@@ -55,7 +56,7 @@ MSF_ENCODER=x86/shikata_ga_nai
 # HINT: post/windows/manage/migrate -N wininit.exe
 # HINT: post/multi/recon/local_exploit_suggester
 --------------------------------------------------
-RUN_POST_MODULE=NO
+RUN_POST_EXPLOTATION=NO
 POST_MODULE=post/windows/gather/enum_applications
 --------------------------------------------------
 

