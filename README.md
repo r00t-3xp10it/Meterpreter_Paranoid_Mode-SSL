@@ -80,6 +80,7 @@ Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 Default msf post module to run at session creation
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/FuZA68.png)
+Handler doing SSL/TLS validation and running post-exploitation
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
 
 <br /><br />
