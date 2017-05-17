@@ -78,7 +78,7 @@ msf postgresql database connection check? (msfdb reinit)
 Default payload extension (output) to use in staged builds
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
 Metasploit encoder to use in obfuscating payload sourcecode
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
+![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/jG_NM0-.png)
 This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.69:666 ..)
 <br />
 using the encoder sellected on settings file (default: x86/shikata_ga_nai)
