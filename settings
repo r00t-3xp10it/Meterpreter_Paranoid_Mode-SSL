@@ -44,12 +44,21 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 
 
-### Default msf core command to run at session creation
-# This next setting allow users to chose any msf core
-# command to run on session creation automate ..
-----------------------------
-POST_EXPLOIT_COMMAND=sysinfo
-----------------------------
+### Default msf post module to run at session creation
+# This next setting allow users to chose any msf post
+# module to run on session creation automate .
+# ---
+# HINT: post/windows/gather/enum_tokens
+# HINT: post/windows/gather/enum_shares
+# HINT: post/windows/gather/enum_applications
+# HINT: post/windows/gather/enum_powershell_env
+# HINT: post/windows/manage/migrate -N wininit.exe
+# HINT: post/multi/recon/local_exploit_suggester
+----------------------------------------------------------
+POST_EXPLOIT_COMMAND=post/windows/gather/enum_applications
+----------------------------------------------------------
+# post/windows/gather/enum_applications <--(default post-module)
+
 
 
 

