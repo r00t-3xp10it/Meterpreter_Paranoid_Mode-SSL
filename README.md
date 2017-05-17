@@ -33,7 +33,7 @@
      SHA1 hash for validation. Just like with the Payload we set the parameters
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
-     when we recibe a session back, we can see the stage doing the validation
+     We can see the stage doing the validation when we recibe a session ..
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/oiATdEQ.png)
 
  
