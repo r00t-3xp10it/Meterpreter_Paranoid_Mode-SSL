@@ -80,6 +80,7 @@ Default payload extension (output) to use in staged builds
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 This tool will also encode the 'stage' beeing send (sending stage to ...)
+<br />
 using the encoder sellected on settings file (default: x86/shikata_ga_nai)
 ![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JD2CqId.png)
 Default msf post module to run at session creation
