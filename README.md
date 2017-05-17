@@ -33,6 +33,10 @@
      SHA1 hash for validation. Just like with the Payload we set the parameters
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
+     This tool will also encode the 'stage' beeing send (sending stage to ...)
+     using the encoder sellected on settings file (default: x86/shikata_ga_nai)
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JD2CqId.png)
+
      We can see the stage doing the validation when we recibe a session back ..
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/oiATdEQ.png)
 
@@ -123,5 +127,7 @@ http://buffered.io/posts/staged-vs-stageless-handlers/
 https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
 
 https://www.darkoperator.com/blog/2015/6/14/tip-meterpreter-ssl-certificate-validation
+
+https://github.com/rapid7/metasploit-framework/issues/4395
 
 **Suspicious-Shell-Activity (SSA) RedTeam develop @2017**
