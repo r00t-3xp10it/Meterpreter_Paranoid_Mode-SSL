@@ -33,10 +33,6 @@
      SHA1 hash for validation. Just like with the Payload we set the parameters
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
-     This tool will also encode the 'stage' beeing send (sending stage to ...)
-     using the encoder sellected on settings file (default: x86/shikata_ga_nai)
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JD2CqId.png)
-
      We can see the stage doing the validation when we recibe a session back ..
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/oiATdEQ.png)
 
@@ -83,6 +79,9 @@ Default payload extension (output) to use in staged builds
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
+This tool will also encode the 'stage' beeing send (sending stage to ...)
+using the encoder sellected on settings file (default: x86/shikata_ga_nai)
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JD2CqId.png)
 Default msf post module to run at session creation
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/1ZhvEgq.png)
 Handler doing SSL/TLS validation and running post-exploitation module (enum_applications)
