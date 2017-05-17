@@ -9,7 +9,7 @@
 ## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
     Version release: v1.3 (Beta)
     Author: pedro ubuntu [ r00t-3xp10it ]
-    Distros Supported : Linux Kali, Mint, Ubuntu,Parrot
+    Distros Supported : Linux Kali, Mint, Ubuntu, Parrot
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
 
 <br /><br />
@@ -103,9 +103,8 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
 <br /><br />
 
 ## Tool screenshots
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/em7t0J6.png)
+![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/9wLwe8D.png)
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/ws0tkJU.png)
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/5dgO89S.png)
 
 <br />
 
