@@ -33,8 +33,8 @@
      SHA1 hash for validation. Just like with the Payload we set the parameters
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
-     This tool also allow users to run your favorite post-module at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
+     when we recibe a session back, we can see the stage doing the validation
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/oiATdEQ.png)
 
  
 ## Exploitation:
@@ -79,7 +79,8 @@ Default payload extension (output) to use in staged builds
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/klS2vq.png)
 Default msf post module to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/JWulri.png)
+![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/FuZA68.png)
+![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
 
 <br /><br />
 

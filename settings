@@ -54,10 +54,10 @@ MSF_ENCODER=x86/shikata_ga_nai
 # HINT: post/windows/gather/enum_powershell_env
 # HINT: post/windows/manage/migrate -N wininit.exe
 # HINT: post/multi/recon/local_exploit_suggester
-----------------------------------------------------------
-POST_EXPLOIT_COMMAND=post/windows/gather/enum_applications
-----------------------------------------------------------
-# post/windows/gather/enum_applications <--(default post-module)
+--------------------------------------------------
+RUN_POST_MODULE=NO
+POST_MODULE=post/windows/gather/enum_applications
+--------------------------------------------------
 
 
 

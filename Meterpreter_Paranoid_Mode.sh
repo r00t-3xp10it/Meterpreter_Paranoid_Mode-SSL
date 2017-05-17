@@ -41,7 +41,7 @@ ENCODE=`cat $IPATH/settings | egrep -m 1 "MSF_ENCODER" | cut -d '=' -f2` > /dev/
 ChEk_DB=`cat $IPATH/settings | egrep -m 1 "REBUILD_MSFDB" | cut -d '=' -f2` > /dev/null 2>&1 # Rebuild msfdb database?
 DEFAULT_EXT=`cat $IPATH/settings | egrep -m 1 "PAYLOAD_EXTENSION" | cut -d '=' -f2` > /dev/null 2>&1 # Payload extension(bat|ps1|txt)
 ENCODE_NUMB=`cat $IPATH/settings | egrep -m 1 "ENCODER_INTERACTIONS" | cut -d '=' -f2` > /dev/null 2>&1 # Interactions to encode (0|9)
-PoSt=`cat $IPATH/settings | egrep -m 1 "POST_EXPLOIT_COMMAND" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup
+PoSt=`cat $IPATH/settings | egrep -m 1 "POST_EXPLOIT" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup
 
 
 
