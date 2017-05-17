@@ -31,11 +31,9 @@
      Once that payload is created we need to create a handler to receive the
      connection and again we use the PEM certificate so the handler can use the
      SHA1 hash for validation. Just like with the Payload we set the parameters
-     HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true. 
+     HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
-
-    When we get payload execution (target), we can see the stage doing the validation
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/culWay.png)
+     This tool also allow users to run your favorite post-module at session creation
 ![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
 
  
