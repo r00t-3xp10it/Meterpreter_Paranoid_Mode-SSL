@@ -36,7 +36,8 @@ PAYLOAD_EXTENSION=bat
 # and set how many interactions should by used to obfuscate .
 # ---
 # HINT: If we are planing in using a x64 payload build, then we
-# need to chose the conrrespondent encoder to x64 bits systems.  
+# need to chose the conrrespondent encoder to x64 bits systems.
+# HINT: This tool will use this encoder in multi/handler too.
 ------------------------------
 ENCODER_INTERACTIONS=3
 MSF_ENCODER=x86/shikata_ga_nai
