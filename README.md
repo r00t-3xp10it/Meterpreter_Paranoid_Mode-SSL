@@ -82,6 +82,7 @@ Metasploit encoder to use in obfuscating payload sourcecode
 This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.69:666 ..)
 <br />
 using the unicode_encoder + encoder sellected on settings file (default: x86/shikata_ga_nai)
+![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/kByZP7B.png)
 ![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/8Dm03ss.png)
 <br />
 Default msf post module to run at session creation
