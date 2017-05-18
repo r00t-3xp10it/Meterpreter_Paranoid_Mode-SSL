@@ -118,6 +118,8 @@ Meterpreter_Paranoid_Mode [ Stageless payload - exe ]: https://www.youtube.com/w
 
 Meterpreter_Paranoid_Mode [ Staged payload - ps1 ]: ---
 
+Meterpreter_Paranoid_Mode [ Setting diferent encoder and post-modules ]: ---
+
 <br />
 
 ### Special thanks (POCs):
