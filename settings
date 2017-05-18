@@ -17,7 +17,7 @@
 # connection status and rebuild msfdb if not connected.
 # values accepted are: OFF or ON
 -----------------
-REBUILD_MSFDB=ON
+REBUILD_MSFDB=OFF
 -----------------
 
 
@@ -26,7 +26,7 @@ REBUILD_MSFDB=ON
 # This next setting accepts ( bat | ps1 | txt ) extensions .
 # just change the next value to suite your needs ..
 ---------------------
-PAYLOAD_EXTENSION=ps1
+PAYLOAD_EXTENSION=bat
 ---------------------
 
 
@@ -45,9 +45,9 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 
 
-### Enable Unicode encoding in handler?
-# This next setting offers a extra layer of obfuscation
-# to the stager beeing send (sending stage to 192.168.1.69:8081)
+### Enable Unicode encoding in handler (stager)?
+# This next setting offers a extra layer of obfuscation to
+# the stager beeing send (sending stage to 192.168.1.69:8081)
 # values accepted are: false or true
 -----------------------------
 ENABLE_UNICODE_ENCODING=false
