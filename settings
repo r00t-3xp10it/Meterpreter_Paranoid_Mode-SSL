@@ -45,7 +45,17 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 
 
-### Enable Unicode encoding in handler (stager)?
+### Enable encoding in handler (EnableStageEncoding)?
+# This next setting offers a extra layer of obfuscation to
+# the stager beeing send (sending stage to 192.168.1.69:8081)
+# values accepted are: false or true
+---------------------------
+ENABLE_STAGE_ENCODING=false
+---------------------------
+
+
+
+### Enable Unicode encoding in handler (EnableUnicodeEncoding)?
 # This next setting offers a extra layer of obfuscation to
 # the stager beeing send (sending stage to 192.168.1.69:8081)
 # values accepted are: false or true
