@@ -273,7 +273,6 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   #
   # Check for NON-compatible extension (staged payloads) ..
   #
-  #if [ "$DEFAULT_EXT" = "exe" ]; then
   if [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "ps1" ] || [ "$DEFAULT_EXT" = "txt" ]; then
   echo "compatible extension" > /dev/null 2>&1
   else

@@ -50,10 +50,12 @@ MSF_ENCODER=x86/shikata_ga_nai
 # module to run on session creation (meterpreter >)
 # values accepted are: NO or YES and:
 # ---
+# HINT: post/multi/gather/env
 # HINT: post/windows/gather/enum_tokens
 # HINT: post/windows/gather/enum_shares
 # HINT: post/windows/gather/enum_applications
 # HINT: post/windows/gather/enum_powershell_env
+# HINT: post/windows/gather/enum_logged_on_users
 # HINT: post/windows/manage/migrate -N wininit.exe
 # HINT: post/multi/recon/local_exploit_suggester
 --------------------------------------------------
