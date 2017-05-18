@@ -17,7 +17,7 @@
 # connection status and rebuild msfdb if not connected.
 # values accepted are: OFF or ON
 -----------------
-REBUILD_MSFDB=OFF
+REBUILD_MSFDB=ON
 -----------------
 
 
@@ -26,7 +26,7 @@ REBUILD_MSFDB=OFF
 # This next setting accepts ( bat | ps1 | txt ) extensions .
 # just change the next value to suite your needs ..
 ---------------------
-PAYLOAD_EXTENSION=bat
+PAYLOAD_EXTENSION=ps1
 ---------------------
 
 
@@ -45,6 +45,16 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 
 
+### Enable Unicode encoding in handler?
+# This next setting offers a extra layer of obfuscation
+# to the stager beeing send (sending stage to 192.168.1.69:8081)
+# values accepted are: false or true
+-----------------------------
+ENABLE_UNICODE_ENCODING=false
+-----------------------------
+
+
+
 ### Default msf post module to run at session creation
 # This next setting allow users to chose any msf post
 # module to run on session creation (meterpreter >)
@@ -56,7 +66,7 @@ MSF_ENCODER=x86/shikata_ga_nai
 # HINT: post/windows/gather/enum_applications
 # HINT: post/windows/gather/enum_powershell_env
 # HINT: post/windows/gather/enum_logged_on_users
-# HINT: post/windows/manage/migrate -N wininit.exe
+# HINT: post/windows/manage/migrate NAME=wininit.exe
 # HINT: post/multi/recon/local_exploit_suggester
 --------------------------------------------------
 RUN_POST_EXPLOTATION=NO
