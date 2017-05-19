@@ -1,6 +1,6 @@
 [![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.3-brightgreen.svg?maxAge=259200)]()
 [![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)]()
-[![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu,Parrot-blue.svg)]()
+[![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu-blue.svg)]()
 
 
 ![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/4xyGfw.png)
@@ -9,7 +9,7 @@
 ## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
     Version release: v1.3 (Beta)
     Author: pedro ubuntu [ r00t-3xp10it ]
-    Distros Supported : Linux Kali, Mint, Ubuntu, Parrot
+    Distros Supported : Linux Kali, Mint, Ubuntu
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
 
 <br /><br />
@@ -107,7 +107,7 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
          nano settings
 
     4º - Run main tool
-         ./Meterpreter_Paranoid_Mode.sh
+         sudo ./Meterpreter_Paranoid_Mode.sh
 
 <br /><br />
 
