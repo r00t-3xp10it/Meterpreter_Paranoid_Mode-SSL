@@ -5,6 +5,7 @@
 #   are the fields you want to toy with. There are additional options, read  #
 #   the comments For additional config settings.                             #
 #                                                                            #
+#     WARNING: THIS FILE ITS 'CASE SENSITIVE' ( NO its diferent from no )    #
 #   THIS SETTINGS WILL AFFECT 'Meterpreter_Paranoid_Mode.sh' WAY OF WORKING  #
 #                                                                            #
 ##############################################################################
@@ -36,8 +37,8 @@ PAYLOAD_EXTENSION=bat
 # and set how many interactions should by used to obfuscate .
 # ---
 # HINT: If we are planing in using a x64 payload build, then we
-# need to chose the conrrespondent encoder to x64 bits systems.
-# HINT: This tool will use this encoder in multi/handler too.
+# need to chose the comrrespondent encoder to x64 bits systems.
+# HINT: This tool will use this encoder in the multi/handler
 ------------------------------
 ENCODER_INTERACTIONS=3
 MSF_ENCODER=x86/shikata_ga_nai
@@ -45,7 +46,7 @@ MSF_ENCODER=x86/shikata_ga_nai
 
 
 
-### Enable encoding in handler (EnableStageEncoding)?
+### Enable stage encoding in handler (EnableStageEncoding)?
 # This next setting offers a extra layer of obfuscation to
 # the stager beeing send (sending stage to 192.168.1.69:8081)
 # values accepted are: false or true
@@ -67,7 +68,7 @@ ENABLE_UNICODE_ENCODING=false
 
 ### Default msf post module to run at session creation
 # This next setting allow users to chose any msf post
-# module to run on session creation (meterpreter >)
+# module to run on session creation (post-modules)
 # values accepted are: NO or YES and:
 # ---
 # HINT: post/multi/gather/env
