@@ -7,7 +7,7 @@
 
 
 ## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
-    Version release: v1.3 (Beta)
+    Version release: v1.3 (Stable)
     Author: pedro ubuntu [ r00t-3xp10it ]
     Distros Supported : Linux Kali, Mint, Ubuntu
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
@@ -119,7 +119,7 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
 ## Video tutorials:
 Meterpreter_Paranoid_Mode [ Stageless payload - exe ]: https://www.youtube.com/watch?v=czbpD_4Mcdw
 
-Meterpreter_Paranoid_Mode [ Staged payload - ps1 ]: ---
+Meterpreter_Paranoid_Mode [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
 
 Meterpreter_Paranoid_Mode [ Setting diferent encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
 
