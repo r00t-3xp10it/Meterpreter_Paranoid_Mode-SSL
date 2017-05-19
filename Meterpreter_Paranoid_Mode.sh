@@ -220,8 +220,17 @@ if [ "$cHos" = "manual certificate" ]; then
   cd $IPATH/output
   echo ${BlueF}[☠]${white} Building certificate ..${BlueF};
   openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=$CoNtRy/ST=$StAtE/L=$CiTy/O=$OrGa/CN=$N4M3" -keyout $N4M3.key -out $N4M3.crt && cat $N4M3.key $N4M3.crt > $N4M3.pem && rm -f $N4M3.key $N4M3.crt
+    #
+    # Check if certificate was build (shanty bug-report)..
+    #
+    if ! [ -f "$IPATH/output/$N4M3.pem" ]; then
+      echo ${RedF}[x]${white}" Certificate: $N4M3.pem not found, aborting .."
+      sleep 2
+      exit
+    fi
   echo ${BlueF}[☠]${white}" Stored: output/$N4M3.pem .."${BlueF};
   sleep 1
+
 
 elif [ "$cHos" = "impersonate domain" ]; then
   #
@@ -242,7 +251,16 @@ elif [ "$cHos" = "impersonate domain" ]; then
   # Cleanup, copy/paste in output folder ..
   mv *.pem $IPATH/output/$N4M3.pem > /dev/null 2>&1
   rm *.key && rm *.crt && rm *.log > /dev/null 2>&1
+    #
+    # Check if certificate was build (shanty bug-report)..
+    #
+    if ! [ -f "$IPATH/output/$N4M3.pem" ]; then
+      echo ${RedF}[x]${white}" Certificate: $N4M3.pem not found, aborting .."
+      sleep 2
+      exit
+    fi
   echo ${BlueF}[☠]${white}" Stored: output/$N4M3.pem .."${BlueF};
+  sleep 1
   cd $IPATH/output
   sleep 1
 
