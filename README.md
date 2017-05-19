@@ -42,6 +42,8 @@
     builds payload (staged OR stageless), starts the comrespondent handler associated to
     the PEM certificate created (manual) OR impersonated (msf auxliary module) and runs
     post-exploitation modules at session creation if configurated in the settings file.
+
+    HINT: This tool will NOT deliver payloads (you have to do it yourself)
 ![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
