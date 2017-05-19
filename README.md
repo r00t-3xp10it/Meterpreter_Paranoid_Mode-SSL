@@ -134,6 +134,4 @@ https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Paranoid-Mode
 
 https://www.darkoperator.com/blog/2015/6/14/tip-meterpreter-ssl-certificate-validation
 
-https://github.com/rapid7/metasploit-framework/issues/4395
-
 **Suspicious-Shell-Activity (SSA) RedTeam develop @2017**
