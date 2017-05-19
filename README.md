@@ -107,7 +107,7 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
          nano settings
 
     4º - Run main tool
-         sudo ./Meterpreter_Paranoid_Mode.sh
+         ./Meterpreter_Paranoid_Mode.sh
 
 <br /><br />
 
