@@ -124,7 +124,9 @@ Meterpreter_Paranoid_Mode [ Stageless payload - exe ]: https://www.youtube.com/w
 
 Meterpreter_Paranoid_Mode [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
 
-Meterpreter_Paranoid_Mode [ Setting diferent encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
+Meterpreter_Paranoid_Mode [ Stageless payload - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
+
+Meterpreter_Paranoid_Mode [ Staged payload - HTA attack vector ]: ---
 
 <br />
 
