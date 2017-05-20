@@ -120,13 +120,13 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
 <br />
 
 ## Video tutorials:
-Meterpreter_Paranoid_Mode [ Stageless payload - exe ]: https://www.youtube.com/watch?v=czbpD_4Mcdw
+MPM [ Stageless payload - exe ]: https://www.youtube.com/watch?v=czbpD_4Mcdw
 
-Meterpreter_Paranoid_Mode [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
+MPM [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
 
-Meterpreter_Paranoid_Mode [ Stageless - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
+MPM [ Stageless payload - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
 
-Meterpreter_Paranoid_Mode [ Staged payload - HTA attack vector ]: ---
+MPM [ Staged payload - HTA attack vector ]: ---
 
 <br />
 
