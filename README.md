@@ -60,7 +60,6 @@
     xterm, zenity, metasploit, postgresql
 
 
-    WARNING: This tool will NOT deliver payloads (you have to do it yourself)
     WARNING: This tool will NOT evade AV detection, its made to prevent the data
     beeing transmited from client (payload) to server beeing captured (Eavesdropping)
 
@@ -85,9 +84,9 @@ This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.6
 using the encoder + unicode_encoder sellected on settings file (default: x86/shikata_ga_nai)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/UPojMaG.png)
 ![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/MONtNLj.png)
-![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/8Dm03ss.png)
+![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/jVwQUfD.png)
 <br />
-HTA attack vector (deliver agent local lan)
+HTA attack vector (deliver agent in local lan using apache2)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/R-oE7N3.png)
 ![Meterpreter_Paranoid_Mode v1.4](http://4.1m.yt/q77BSk-.png)
 <br />
