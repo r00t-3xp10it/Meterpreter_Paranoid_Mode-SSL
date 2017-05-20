@@ -1,13 +1,13 @@
-[![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.3-brightgreen.svg?maxAge=259200)]()
+[![Version](https://img.shields.io/badge/Meterpreter_Paranoid_Mode-1.4-brightgreen.svg?maxAge=259200)]()
 [![Stage](https://img.shields.io/badge/Release-Stable-brightgreen.svg)]()
 [![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu-blue.svg)]()
 
 
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/4xyGfw.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/4xyGfw.png)
 
 
-## Meterpreter_Paranoid_Mode v1.3 - SSL/TLS connections
-    Version release: v1.3 (Stable)
+## Meterpreter_Paranoid_Mode v1.4 - SSL/TLS connections
+    Version release: v1.4 (Stable)
     Author: pedro ubuntu [ r00t-3xp10it ]
     Distros Supported : Linux Kali, Mint, Ubuntu
     Suspicious-Shell-Activity (SSA) RedTeam develop @2017
@@ -34,7 +34,7 @@
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
      We can see the stage doing the validation when we recibe a session back ..
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/Rr_4tmt.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/Rr_4tmt.png)
 
  
 ## Exploitation:
@@ -42,7 +42,7 @@
     builds payload (staged OR stageless), starts the comrespondent handler associated to
     the PEM certificate created (manual) OR impersonated (msf auxliary module) and runs
     post-exploitation modules at session creation if configurated in the settings file.
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/quzn56A.png)
+![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
     Staged (payload.bat|ps1|txt):
@@ -69,28 +69,32 @@
 
     WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
     WARNING: 'Staged' payloads in this tool will not use the .exe extension
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/wzgG0m.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/wzgG0m.png)
 
 <br /><br />
 
-## Config Settings file
+## Config Settings file (warning: settings file its case sensitive)
 msf postgresql database connection check? (msfdb reinit)
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/tLKSkOQ.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/tLKSkOQ.png)
 Default payload extension (output) to use in staged builds
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/UuJ7dTt.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/UuJ7dTt.png)
 Metasploit encoder to use in obfuscating payload sourcecode
-![Meterpreter_Paranoid_Mode v1.3](http://1.1m.yt/jG_NM0-.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/jG_NM0-.png)
 This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.69:666 ..)
 <br />
 using the encoder + unicode_encoder sellected on settings file (default: x86/shikata_ga_nai)
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/UPojMaG.png)
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/MONtNLj.png)
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/8Dm03ss.png)
+![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/UPojMaG.png)
+![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/MONtNLj.png)
+![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/8Dm03ss.png)
+<br />
+HTA attack vector (deliver agent local lan)
+![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/R-oE7N3.png)
+![Meterpreter_Paranoid_Mode v1.4](http://4.1m.yt/q77BSk-.png)
 <br />
 Default msf post module to run at session creation
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/1ZhvEgq.png)
+![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/1ZhvEgq.png)
 Handler doing SSL/TLS validation and running post-exploitation module (enum_applications)
-![Meterpreter_Paranoid_Mode v1.3](http://4.1m.yt/jq464O0.png)
+![Meterpreter_Paranoid_Mode v1.4](http://4.1m.yt/jq464O0.png)
 
 <br /><br />
 
@@ -111,8 +115,8 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
 <br /><br />
 
 ## Tool screenshots
-![Meterpreter_Paranoid_Mode v1.3](http://3.1m.yt/9wLwe8D.png)
-![Meterpreter_Paranoid_Mode v1.3](http://2.1m.yt/ws0tkJU.png)
+![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/9wLwe8D.png)
+![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/ws0tkJU.png)
 
 <br />
 
