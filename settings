@@ -24,7 +24,7 @@ REBUILD_MSFDB=OFF
 
 
 ### Default payload extension (output) to use in staged builds
-# This next setting accepts ( bat | ps1 | txt ) extensions .
+# This next setting accepts ( bat | ps1 | txt | exe ) extensions .
 # just change the next value to suite your needs ..
 ---------------------
 PAYLOAD_EXTENSION=bat
@@ -38,7 +38,6 @@ PAYLOAD_EXTENSION=bat
 # ---
 # HINT: If we are planing in using a x64 payload build, then we
 # need to chose the comrrespondent encoder to x64 bits systems.
-# HINT: This tool will use this encoder in the multi/handler
 ------------------------------
 ENCODER_INTERACTIONS=3
 MSF_ENCODER=x86/shikata_ga_nai
@@ -86,13 +85,13 @@ POST_MODULE=post/windows/gather/enum_applications
 
 
 
-### HTA attack vector (deliver agent using apache2+hta)
+### HTA attack vector (deliver agent using apache2 + hta)
 # This next setting allow users to use apache2 and one
 # hta file (trigger agent download and execution in ram)
 # to be able to deliver your agent to target (local lan)
 # ---
-# HINT: The 'paranoid-stageless.exe' will be downloaded and
-# executed into target %temp% folder (manual clean required)
+# HINT: Agents (exe|bat) will be downloaded and executed
+# into target %temp% folder (manual clean required).
 # values accepted are: OFF or ON
 ---------------------
 HTA_ATTACK_VECTOR=OFF
