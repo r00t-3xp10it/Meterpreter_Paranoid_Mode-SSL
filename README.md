@@ -34,7 +34,7 @@
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
      We can see the stage doing the validation when we recibe a session back ..
-![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/Rr_4tmt.png)
+![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/SIv6S3.png)
 
  
 ## Exploitation:
@@ -67,13 +67,11 @@
     WARNING: If you decided to use a 64bit payload, then edit settings file and change
     'MSF_ENCODER=x86/shikata_ga_nai' to one payload arch compatible encoder(64bit)
 
-    WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt)
-    WARNING: 'Staged' payloads in this tool will not use the .exe extension
-![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/wzgG0m.png)
+    WARNING: Only in 'staged' builds, Users are allowed to chose the extension (bat|ps1|txt|exe)
 
 <br /><br />
 
-## Config Settings file (warning: settings file its case sensitive)
+## Config Settings file (warning: case sensitive)
 msf postgresql database connection check? (msfdb reinit)
 ![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/tLKSkOQ.png)
 Default payload extension (output) to use in staged builds
@@ -85,7 +83,7 @@ This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.6
 using the encoder + unicode_encoder sellected on settings file (default: x86/shikata_ga_nai)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/UPojMaG.png)
 ![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/MONtNLj.png)
-![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/jVwQUfD.png)
+![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/Rr_4tmt.png)
 <br />
 HTA attack vector (deliver agent in local lan using apache2)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/R-oE7N3.png)
@@ -125,14 +123,14 @@ MPM [ Stageless payload - exe ]: https://www.youtube.com/watch?v=czbpD_4Mcdw
 
 MPM [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
 
-MPM [ Stageless payload - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
+MPM [ Stageless payload -exe - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
 
-MPM [ Staged payload - HTA attack vector ]: ---
+MPM [ Staged payload - ps1 - HTA attack vector ]: ---
 
 <br />
 
 ### Special thanks (POCs):
-**@hdmoore** | **@OJ** | **@darkoperator**
+**@hdmoore** | **@OJ** | **@darkoperator** | **Milton@barra(SSA)**
 
 http://buffered.io/posts/staged-vs-stageless-handlers/
 
