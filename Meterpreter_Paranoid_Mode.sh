@@ -50,6 +50,18 @@ StAgE=`cat $IPATH/settings | egrep -m 1 "ENABLE_STAGE_ENCODING" | cut -d '=' -f2
 HtA=`cat $IPATH/settings | egrep -m 1 "HTA_ATTACK_VECTOR" | cut -d '=' -f2` > /dev/null 2>&1 # Use hta attack vector to deliver agent?
 
 
+
+#
+# check if user is root
+#
+if [ $(id -u) != "0" ]; then
+echo "[☠] we need to be root to run this script..."
+echo "[☠] execute [ sudo ./Meterpreter_Paranoid_Mode.sh ] on terminal"
+exit
+fi
+
+
+
 #
 # Pass arguments to script [ ./Meterpreter_Paranoid_Mode.sh -h ]
 #
