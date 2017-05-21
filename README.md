@@ -125,7 +125,7 @@ MPM [ Staged payload - bat ]: https://www.youtube.com/watch?v=Z51jBiFnPGE
 
 MPM [ Stageless payload -exe - set encoder and post-module ]: https://www.youtube.com/watch?v=EBZq-JpGQMM
 
-MPM [ Staged payload - ps1 - HTA attack vector ]: ---
+MPM [ Staged payload - ps1 - HTA attack vector ]: https://www.youtube.com/watch?v=JuoczGI4B3E
 
 <br />
 
