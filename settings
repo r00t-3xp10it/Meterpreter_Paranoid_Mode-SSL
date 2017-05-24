@@ -34,7 +34,7 @@ PAYLOAD_EXTENSION=bat
 
 ### Agent output name (input your agent name manually)
 # By default MPM choses agent name based on payload category
-# but it can by config to ask to users to input agent name.
+# but it can be config to ask to users to input agent name.
 # values accepted are: OFF or ON
 --------------------
 INPUT_AGENT_NAME=OFF
