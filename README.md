@@ -114,7 +114,7 @@ Handler doing SSL/TLS validation and running post-exploitation module (enum_appl
 
 <br /><br />
 
-## Tool screenshots
+## Tool screenshots:
 ![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/9wLwe8D.png)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/ws0tkJU.png)
 
