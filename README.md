@@ -43,7 +43,6 @@
     the PEM certificate created (manual) OR impersonated (msf auxliary module) runs msf
     post-exploitation modules at session creation, deliver agents (staged or stageless)
     using hta attack vector (apache2 + hta + agent) if configurated in the settings file.
-![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/quzn56A.png)
 
 ## Payloads available:
     Staged (payload.bat|ps1|txt|exe):
@@ -85,7 +84,6 @@ This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.6
 using the encoder + unicode_encoder sellected on settings file (default: x86/shikata_ga_nai)
 ![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/m1G2TR.png)
 ![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/MONtNLj.png)
-![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/Rr_4tmt.png)
 <br />
 HTA attack vector (deliver agent in local lan using apache2)
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/R-oE7N3.png)
@@ -93,8 +91,6 @@ HTA attack vector (deliver agent in local lan using apache2)
 <br />
 Default msf post module to run at session creation
 ![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/1ZhvEgq.png)
-Handler doing SSL/TLS validation and running post-exploitation module (enum_applications)
-![Meterpreter_Paranoid_Mode v1.4](http://4.1m.yt/jq464O0.png)
 
 <br /><br />
 
