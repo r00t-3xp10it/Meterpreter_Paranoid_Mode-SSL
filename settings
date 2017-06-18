@@ -88,10 +88,11 @@ ENABLE_UNICODE_ENCODING=false
 # HINT: post/windows/gather/enum_logged_on_users
 # HINT: post/windows/manage/migrate NAME=wininit.exe
 # HINT: post/multi/recon/local_exploit_suggester
---------------------------------------------------
+# HINT: post/multi/gather/wlan_geolocate
+----------------------------------------------------
 RUN_POST_EXPLOTATION=NO
-POST_MODULE=post/windows/gather/enum_applications
---------------------------------------------------
+POST_MODULE=post/multi/recon/local_exploit_suggester
+----------------------------------------------------
 
 
 

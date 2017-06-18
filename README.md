@@ -111,8 +111,8 @@ Default msf post module to run at session creation
 <br /><br />
 
 ## Tool screenshots:
-![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/9wLwe8D.png)
-![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/ws0tkJU.png)
+![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/EtznB0.png)
+![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/Xn9sMT.png)
 
 <br />
 
