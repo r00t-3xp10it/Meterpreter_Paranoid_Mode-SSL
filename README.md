@@ -81,7 +81,7 @@ This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.6
 <br />
 using the encoder + unicode_encoder sellected on settings file (default: x86/shikata_ga_nai)
 ![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/m1G2TR.png)
-![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/MONtNLj.png)
+![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/IpyB2u.png)
 <br />
 HTA attack vector (deliver agent in local lan using apache2)
 ![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/nqjahX.png)
