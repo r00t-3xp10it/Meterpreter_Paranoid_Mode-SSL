@@ -3,8 +3,6 @@
 [![Build](https://img.shields.io/badge/Supported_OS-kali,Mint,Ubuntu-blue.svg)]()
 
 
-![Meterpreter_Paranoid_Mode v1.4](http://1.1m.yt/4xyGfw.png)
-
 
 ## Meterpreter_Paranoid_Mode v1.4 - SSL/TLS connections
     Version release: v1.4 (Stable)
