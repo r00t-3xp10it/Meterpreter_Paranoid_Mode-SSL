@@ -32,7 +32,7 @@
      HANDLERSSLCERT with the path to the PEM file and stagerverifysslcert to true.
 
      We can see the stage doing the validation when we recibe a session back ..
-![Meterpreter_Paranoid_Mode v1.4](http://3.1m.yt/SIv6S3.png)
+![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/cNoQaV.png)
 
  
 ## Exploitation:
@@ -74,7 +74,7 @@ msf postgresql database connection check? (msfdb reinit)
 Default payload extension (output) to use in staged builds
 ![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/TJ3key.png)
 Input agent (output) name manually
-![Meterpreter_Paranoid_Mode v1.4](http://2.1m.yt/T0MmF9I.png)
+![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/VsKyIE.png)
 Metasploit encoder to use in obfuscating payload sourcecode
 ![Meterpreter_Paranoid_Mode v1.4](http://i.cubeupload.com/McAQNP.png)
 This tool will also encode the 'stage' beeing send (sending stage to 192.168.1.69:666 ..)
