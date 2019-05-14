@@ -253,6 +253,8 @@ elif [ "$cHos" = "impersonate domain" ]; then
   # Impersonate a legit domain (msf auxiliary module)
   # Copy files generated to proper location and cleanup ..
   #
+  location=`locate .msf4/loot`
+  rm $location/* > /dev/null 2>&1
   echo ${BlueF}[☠]${white} Input pem settings ..${Reset};
   N4M3=$(zenity --title="☠ Enter DOMAIN NAME (CN) ☠" --text "example: ssa-team.com" --entry --width 270) > /dev/null 2>&1
   echo ${BlueF}[☠]${white} Impersonating certificate ..${BlueF};
@@ -262,10 +264,9 @@ elif [ "$cHos" = "impersonate domain" ]; then
   echo "................................................................................................................................................................................................................................................................................................................................................................................................................"
   sleep 1
   echo "Writing new private key to '$N4M3.key'"
-  cd ~/.msf4/loot
-  # Cleanup, copy/paste in output folder ..
-  mv *.pem $IPATH/output/$N4M3.pem > /dev/null 2>&1
-  rm *.key && rm *.crt && rm *.log > /dev/null 2>&1
+  cert=`ls $location | head -n 6 | tail -n 1`
+  mv $location/$cert $IPATH/output/$N4M3.pem
+  rm $location/* > /dev/null 2>&1
     #
     # Check if certificate was build (shanty bug-report)..
     #
